@@ -1,0 +1,118 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Job {
+  id          String   @id @default(cuid())
+  title       String
+  department  String   // e.g. "Engineering & Construction"
+  location    String
+  type        String   // e.g. "Contract", "Permanent"
+  description String   // HTML/Rich Text
+  skills      String   // Stored as JSON string or comma-separated
+  isActive    Boolean  @default(true)
+  postedDate  DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  applications Application[]
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String   // HTML/Rich Text
+  image     String?  // URL to header image
+  author    String   @default("LEADPEC Team")
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Inquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  status    String   @default("PENDING") // PENDING, REVIEWED, ARCHIVED
+  createdAt DateTime @default(now())
+}
+
+model Application {
+  id          String   @id @default(cuid())
+  jobId       String?
+  job         Job?     @relation(fields: [jobId], references: [id])
+  name        String
+  email       String
+  phone       String
+  linkedin    String?
+  coverLetter String?
+  status      String   @default("PENDING") // PENDING, REVIEWED, INTERVIEW, OFFER, REJECTED
+  createdAt   DateTime @default(now())
+}
+
+model Sector {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  content     String
+  heroImage   String?
+  middleImage String?
+  bottomImage String?
+  iconName    String?
+  branding    String?  // JSON: { heroTitle, subtitle, quote, conceptTitle, processTitle }
+  process     String?  // JSON: Array of steps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  content     String?
+  heroImage   String?
+  iconName    String?
+  features    String?  // JSON: Array of features
+  branding    String?  // JSON: Corporate polish branding
+  process     String?  // JSON: Process flow
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteAsset {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  url         String
+  section     String   // e.g. "Home", "About", "Sectors"
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

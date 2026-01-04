@@ -1,0 +1,36 @@
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+import { AboutContent } from "@/components/pages/about-content";
+import { prisma } from "@/lib/db";
+
+export const dynamic = 'force-dynamic';
+
+export default async function AboutPage() {
+    let assets: any[] = [];
+    if (prisma) {
+        assets = await prisma.siteAsset.findMany({
+            where: {
+                key: {
+                    in: ["ABOUT_HERO_BG", "ABOUT_MISION_IMG", "ABOUT_VISION_IMG"]
+                }
+            }
+        });
+    }
+
+    const assetMap = assets.reduce((acc, asset) => {
+        acc[asset.key] = asset.url;
+        return acc;
+    }, {} as Record<string, string>);
+
+    return (
+        <div className="flex min-h-screen flex-col bg-[#051120]">
+            <Header />
+            <AboutContent
+                heroBg={assetMap["ABOUT_HERO_BG"]}
+                missionImg={assetMap["ABOUT_MISION_IMG"]}
+                visionImg={assetMap["ABOUT_VISION_IMG"]}
+            />
+            <Footer />
+        </div>
+    );
+}
