@@ -86,7 +86,7 @@ export function SectorsGrid({ sectors }: SectorsGridProps) {
                 </div>
 
                 <div className="mt-16 text-center">
-                    <Link href="/services">
+                    <Link href="/sectors">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
