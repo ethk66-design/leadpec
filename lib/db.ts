@@ -4,21 +4,19 @@ const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
 let prismaInstance: PrismaClient | null = null;
 
-// Check if we're on Vercel serverless (no persistent SQLite)
-const isVercel = process.env.VERCEL === "1";
+// Initialize Prisma Client (Works for both Local & Vercel Postgres)
+try {
+    prismaInstance = globalForPrisma.prisma || new PrismaClient({ log: ["query"] });
 
-if (!isVercel) {
-    // Local development: Use SQLite normally
-    try {
-        prismaInstance = globalForPrisma.prisma || new PrismaClient({ log: ["query"] });
-        if (process.env.NODE_ENV !== "production") {
-            globalForPrisma.prisma = prismaInstance;
-        }
-    } catch (e) {
-        console.warn("Failed to initialize Prisma Client:", e);
-        prismaInstance = null;
+    if (process.env.NODE_ENV !== "production") {
+        globalForPrisma.prisma = prismaInstance;
     }
+} catch (e) {
+    console.warn("Failed to initialize Prisma Client:", e);
+    // In strict production, we might want to throw, but to keep the site alive 
+    // even if DB fails (using static fallbacks), we keep it catchable.
+    prismaInstance = null;
 }
 
-// Export: On Vercel, this will be null. Pages should handle this gracefully.
+// Export: Should be a valid client instance unless connection fails totally
 export const prisma = prismaInstance;
