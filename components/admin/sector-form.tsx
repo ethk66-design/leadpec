@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ImageUpload } from "@/components/ui/image-upload";
 import { updateSector, createSector } from "@/lib/sector-actions";
 import { Sector } from "@prisma/client";
+import { SectorAssetsManager } from "@/components/admin/sector-assets-manager";
 
 interface SectorFormProps {
     sector?: Sector;
@@ -160,29 +161,16 @@ export function SectorForm({ sector }: SectorFormProps) {
                 <Textarea name="content" id="content" required defaultValue={sector?.content || ""} placeholder="Detailed sector content..." className="min-h-[200px]" />
             </div>
 
+            {/* Legacy Image Management - Replaced by Unified Content Manager */}
             <div className="border-t pt-6">
-                <h3 className="text-lg font-bold mb-4">🖼️ Section Images</h3>
-                <p className="text-sm text-muted-foreground mb-6">Upload images or paste URLs. Toggle between modes using the buttons.</p>
-
-                <div className="grid grid-cols-1 gap-6">
-                    <ImageUpload
-                        value={heroImage}
-                        onChange={setHeroImage}
-                        label="🔝 Hero Image / Grid Card"
-                        description="Used for the Grid Card thumbnail and the main title area background."
-                    />
-                    <ImageUpload
-                        value={middleImage}
-                        onChange={setMiddleImage}
-                        label="↕️ Middle Image (Feature Section)"
-                        description="Background for the mid-page callout."
-                    />
-                    <ImageUpload
-                        value={bottomImage}
-                        onChange={setBottomImage}
-                        label="🔻 Bottom Image (CTA Section)"
-                        description="Background for the CTA near the footer."
-                    />
+                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center">
+                    <h3 className="text-lg font-bold text-blue-800 dark:text-blue-300 mb-2">🖼️ Image Management Has Moved</h3>
+                    <p className="text-sm text-blue-600 dark:text-blue-400 mb-4 max-w-lg mx-auto">
+                        To ensure consistency, all images (Hero, Middle, Bottom, and Concepts) are now managed in the centralized <strong>Page Content</strong> dashboard.
+                    </p>
+                    <Button type="button" variant="default" onClick={() => router.push('/admin/content')}>
+                        Go to Page Content Manager
+                    </Button>
                 </div>
             </div>
 

@@ -10,23 +10,24 @@ import { DynamicImage } from "@/components/ui/dynamic-image";
 interface SectorDetailInfrastructureProps {
     sector: Sector;
     heroImage?: string;
+    images?: Record<string, string>;
 }
 
-export function SectorDetailInfrastructure({ sector, heroImage }: SectorDetailInfrastructureProps) {
+export function SectorDetailInfrastructure({ sector, heroImage, images }: SectorDetailInfrastructureProps) {
     return (
         <main className="flex-1 bg-zinc-50">
             {/* 1. Hero: Industrial Scale */}
             <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0 select-none">
                     <DynamicImage
-                        src={heroImage || "/images/sectors-hero-skyline.png"}
-                        fallbackSrc="/images/sectors-hero-skyline.png"
+                        src={heroImage || "/images/sector-feature-construction.png"}
+                        fallbackSrc="/images/sector-feature-construction.png"
                         alt="Infrastructure Hero"
                         fill
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-[#0B1B32]/90 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0B1B32]/80 via-[#0B1B32]/40 to-transparent" />
                 </div>
 
                 <div className="container relative z-10 px-4">
@@ -40,7 +41,7 @@ export function SectorDetailInfrastructure({ sector, heroImage }: SectorDetailIn
                             INFRASTRUCTURE & <br /> <span className="text-[#4DB6AC]">UTILITIES</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-300 max-w-3xl font-light leading-relaxed italic border-l-4 border-[#4DB6AC] pl-6">
-                            "Engineering the Future of Infrastructure, Powered by People and Precision"
+                            &quot;Engineering the Future of Infrastructure, Powered by People and Precision&quot;
                         </p>
                     </motion.div>
                 </div>
@@ -122,7 +123,7 @@ export function SectorDetailInfrastructure({ sector, heroImage }: SectorDetailIn
                         {/* Bridges & Roads */}
                         <div className="relative h-[400px] rounded-2xl overflow-hidden group border border-white/10">
                             <Image
-                                src="/images/sector-feature-construction.png"
+                                src={images?.["SECTOR_INFRASTRUCTURE_FEATURE_1"] || "/images/sector-feature-construction.png"}
                                 alt="Bridges & Roads"
                                 fill
                                 className="object-cover opacity-50 group-hover:opacity-60 transition-opacity"
@@ -143,7 +144,7 @@ export function SectorDetailInfrastructure({ sector, heroImage }: SectorDetailIn
                         {/* Utilities */}
                         <div className="relative h-[400px] rounded-2xl overflow-hidden group border border-white/10">
                             <Image
-                                src="/images/water-pipe-site.png"
+                                src={images?.["SECTOR_INFRASTRUCTURE_FEATURE_2"] || "/images/water-pipe-site.png"}
                                 alt="Utilities"
                                 fill
                                 className="object-cover opacity-50 group-hover:opacity-60 transition-opacity"
@@ -171,7 +172,7 @@ export function SectorDetailInfrastructure({ sector, heroImage }: SectorDetailIn
                             <div className="h-0.5 w-12 bg-[#4DB6AC]" />
                             <h2 className="text-3xl font-bold text-[#0B1B32]">Bridge Construction Technology</h2>
                         </div>
-                        <p className="text-lg text-slate-600 italic">"Stronger bridges start with stronger talent. LEADPEC delivers both."</p>
+                        <p className="text-lg text-slate-600 italic">&quot;Stronger bridges start with stronger talent. LEADPEC delivers both.&quot;</p>
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <div className="p-6 bg-slate-50 rounded-xl border border-slate-100 hover:border-[#4DB6AC] transition-colors">
                                 <h4 className="font-bold text-[#0B1B32] mb-2">Precast & Segmental</h4>
@@ -202,7 +203,7 @@ export function SectorDetailInfrastructure({ sector, heroImage }: SectorDetailIn
                             <div className="h-0.5 w-12 bg-[#0B1B32]" />
                             <h2 className="text-3xl font-bold text-[#0B1B32]">Road Construction Technology</h2>
                         </div>
-                        <p className="text-lg text-slate-600 italic">"From Foundation to Finish – Technology Meets Expertise on Every Road."</p>
+                        <p className="text-lg text-slate-600 italic">&quot;From Foundation to Finish – Technology Meets Expertise on Every Road.&quot;</p>
                         <div className="grid md:grid-cols-2 gap-8">
                             <div>
                                 <h4 className="font-bold text-xl text-[#0B1B32] mb-3">Pavement Engineering</h4>
@@ -227,7 +228,7 @@ export function SectorDetailInfrastructure({ sector, heroImage }: SectorDetailIn
                     <div className="bg-[#0f172a] text-white p-12 rounded-3xl relative overflow-hidden">
                         <div className="relative z-10 space-y-8">
                             <h2 className="text-3xl font-bold">Utilities Construction Technology</h2>
-                            <p className="text-xl text-[#4DB6AC] italic">"Building Smarter Cities, One Utility at a Time."</p>
+                            <p className="text-xl text-[#4DB6AC] italic">&quot;Building Smarter Cities, One Utility at a Time.&quot;</p>
                             <div className="grid md:grid-cols-2 gap-12">
                                 <div>
                                     <h4 className="font-bold text-lg mb-2 text-white">Water & Sewer Networks</h4>

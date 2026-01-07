@@ -45,7 +45,7 @@ export function RecruitmentCycle() {
                         Our recruitment process
                     </h2>
                     <p className="text-lg text-slate-600 leading-relaxed italic">
-                        "We have the most reliable recruitment process. It is structured in a way to ensure that the most efficient workforce is supplied to our clients."
+                        &quot;We have the most reliable recruitment process. It is structured in a way to ensure that the most efficient workforce is supplied to our clients.&quot;
                     </p>
                 </div>
 

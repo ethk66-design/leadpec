@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { requireAuth } from "@/lib/auth-utils";
 
 const PostSchema = z.object({
     title: z.string().min(1, "Title is required"),
@@ -16,6 +17,12 @@ const PostSchema = z.object({
 });
 
 export async function createPost(formData: FormData) {
+    try {
+        await requireAuth();
+    } catch {
+        return { error: "Unauthorized" };
+    }
+
     const validatedFields = PostSchema.safeParse({
         title: formData.get("title"),
         slug: formData.get("slug"),
@@ -47,6 +54,12 @@ export async function createPost(formData: FormData) {
 }
 
 export async function updatePost(id: string, formData: FormData) {
+    try {
+        await requireAuth();
+    } catch {
+        return { error: "Unauthorized" };
+    }
+
     const validatedFields = PostSchema.safeParse({
         title: formData.get("title"),
         slug: formData.get("slug"),
@@ -80,6 +93,7 @@ export async function updatePost(id: string, formData: FormData) {
 export async function deletePost(id: string) {
     if (!prisma) return { error: "Database not available" };
     try {
+        await requireAuth();
         await prisma.post.delete({
             where: { id },
         });

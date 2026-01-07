@@ -43,6 +43,7 @@ export async function getAllPosts() {
     }
 }
 
+
 export async function createPost(data: {
     title: string;
     slug: string;

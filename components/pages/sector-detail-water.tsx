@@ -10,25 +10,26 @@ import { DynamicImage } from "@/components/ui/dynamic-image";
 interface SectorDetailWaterProps {
     sector: Sector;
     heroImage?: string;
+    images?: Record<string, string>;
 }
 
-export function SectorDetailWater({ sector, heroImage }: SectorDetailWaterProps) {
+export function SectorDetailWater({ sector, heroImage, images }: SectorDetailWaterProps) {
     return (
         <main className="flex-1 bg-white">
             {/* 1. Pure Aqua Hero */}
             <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#0f172a]">
                 <div className="absolute inset-0 z-0 select-none">
                     <DynamicImage
-                        src={heroImage || "/images/water-sector-hero.png"}
-                        fallbackSrc="/images/water-sector-hero.png"
+                        src={heroImage || "/images/water-hero.png"}
+                        fallbackSrc="/images/water-hero.png"
                         alt="Water Sector Hero"
                         fill
                         className="object-cover"
                         priority
                     />
                     {/* Strong Teal Overlay for Water Theme */}
-                    <div className="absolute inset-0 bg-[#0d9488]/70 mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/40" />
+                    <div className="absolute inset-0 bg-[#0d9488]/30 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-[#0f172a]/20" />
                 </div>
 
                 <div className="container relative z-10 px-4">
@@ -42,7 +43,7 @@ export function SectorDetailWater({ sector, heroImage }: SectorDetailWaterProps)
                             WATER & WASTE WATER
                         </h1>
                         <p className="text-xl md:text-2xl text-[#e0f2fe] italic font-light mb-6">
-                            "Engineering Clean Water Through Specialized Manpower"
+                            &quot;Engineering Clean Water Through Specialized Manpower&quot;
                         </p>
                     </motion.div>
                 </div>
@@ -110,7 +111,7 @@ export function SectorDetailWater({ sector, heroImage }: SectorDetailWaterProps)
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div className="order-2 md:order-1">
                             <h3 className="text-3xl font-bold text-[#0B1B32] mb-4">DESALINATION PLANT</h3>
-                            <p className="text-[#0d9488] font-bold italic mb-6">"Engineering excellence. Reliable output. Skilled people—always."</p>
+                            <p className="text-[#0d9488] font-bold italic mb-6">&quot;Engineering excellence. Reliable output. Skilled people—always.&quot;</p>
                             <p className="text-slate-600 mb-4 leading-relaxed">
                                 Desalination today goes far beyond converting seawater to fresh water. It’s an engineering-intensive industry built on advanced processes, energy optimization, and the ability to run at peak performance around the clock. Success requires highly skilled professionals at every stage—from conceptual design and EPC delivery to commissioning, operations, and lifecycle management.
                             </p>
@@ -123,7 +124,7 @@ export function SectorDetailWater({ sector, heroImage }: SectorDetailWaterProps)
                         </div>
                         <div className="order-1 md:order-2 relative h-[350px] rounded-2xl overflow-hidden shadow-xl">
                             <Image
-                                src="/images/water-desalination-plant.png"
+                                src={images?.["SECTOR_WATER_FEATURE_1"] || "/images/water-desalination-plant.png"}
                                 alt="Desalination"
                                 fill
                                 className="object-cover"
@@ -135,7 +136,7 @@ export function SectorDetailWater({ sector, heroImage }: SectorDetailWaterProps)
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl">
                             <Image
-                                src="/images/water-wastewater-treatment.png"
+                                src={images?.["SECTOR_WATER_FEATURE_2"] || "/images/water-wastewater-treatment.png"}
                                 alt="Wastewater Treatment"
                                 fill
                                 className="object-cover"
@@ -143,7 +144,7 @@ export function SectorDetailWater({ sector, heroImage }: SectorDetailWaterProps)
                         </div>
                         <div>
                             <h3 className="text-3xl font-bold text-[#0B1B32] mb-4">WASTE WATER TREATMENT PLANT</h3>
-                            <p className="text-[#0d9488] font-bold italic mb-6">"Engineering Clean Water Through Specialized Manpower"</p>
+                            <p className="text-[#0d9488] font-bold italic mb-6">&quot;Engineering Clean Water Through Specialized Manpower&quot;</p>
                             <p className="text-slate-600 mb-4 leading-relaxed">
                                 Modern wastewater treatment demands advanced biology, chemical accuracy, mechanical strength, and intelligent automation working flawlessly together. Every stage—from inlet screening to tertiary polishing—requires specialists capable of maintaining effluent quality under the GCC’s toughest environmental and regulatory pressures.
                             </p>
@@ -166,7 +167,7 @@ export function SectorDetailWater({ sector, heroImage }: SectorDetailWaterProps)
                             Our team understands the importance of compliance, operational continuity, and reliable manpower in the region’s growing water infrastructure. We supply certified operators, technicians, engineers, and supervisors who meet GCC regulatory and safety standards.
                         </p>
                         <blockquote className="border-l-4 border-[#0d9488] pl-6 italic text-slate-700 bg-slate-50 py-4 my-6">
-                            "Our advantage is simple: we recruit only for utilities and wastewater roles. That focus helps us deliver faster, smarter, and more accurate hiring than general agencies."
+                            &quot;Our advantage is simple: we recruit only for utilities and wastewater roles. That focus helps us deliver faster, smarter, and more accurate hiring than general agencies.&quot;
                         </blockquote>
                         <p className="text-slate-600 leading-relaxed">
                             From technical screening to on-boarding and mobilization, we handle everything. You get qualified professionals, reduced downtime, and a more efficient operation—without wasting time to discover talent pool.
@@ -177,7 +178,7 @@ export function SectorDetailWater({ sector, heroImage }: SectorDetailWaterProps)
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div>
                             <h3 className="text-3xl font-bold text-[#0B1B32] mb-4">Waste to Resource (WTR)</h3>
-                            <p className="text-[#0d9488] font-bold italic mb-6">"Transforming Waste. Empowering Operations. Delivering Talent That Drives Results."</p>
+                            <p className="text-[#0d9488] font-bold italic mb-6">&quot;Transforming Waste. Empowering Operations. Delivering Talent That Drives Results.&quot;</p>
                             <p className="text-slate-600 mb-4 leading-relaxed">
                                 Waste-to-Resource projects require a workforce that understands innovation, precision, and sustainability. As governments and industries push toward circular-economy goals, the success of WTR facilities depends on skilled, reliable professionals who can operate modern waste-processing technologies with confidence.
                             </p>
@@ -190,7 +191,7 @@ export function SectorDetailWater({ sector, heroImage }: SectorDetailWaterProps)
                         </div>
                         <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl">
                             <Image
-                                src="/images/water-waste-to-resource.png"
+                                src={images?.["SECTOR_WATER_FEATURE_3"] || "/images/water-waste-to-resource.png"}
                                 alt="Waste to Resource"
                                 fill
                                 className="object-cover"

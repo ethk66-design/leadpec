@@ -200,13 +200,22 @@ export function HeaderClient({ sectors }: HeaderClientProps) {
                                 {["About Us", "Services", "Sectors", "Job Listings", "Blog", "Contact"].map((item) => (
                                     <Link
                                         key={item}
-                                        href={item === "Job Listings" ? "/careers" : item === "Sectors" ? "/services" : `/${item.split(" ")[0].toLowerCase()}`}
+                                        href={item === "Job Listings" ? "/careers" : item === "Sectors" ? "/sectors" : `/${item.split(" ")[0].toLowerCase()}`}
                                         className="text-lg font-bold text-white hover:text-[#008CBA] transition-colors"
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         {item}
                                     </Link>
                                 ))}
+                                <div className="h-px bg-white/10 my-2" />
+                                <div className="flex flex-col gap-3 text-sm text-gray-300">
+                                    <a href={`tel:${CONTACT_INFO.phone}`} className="flex items-center gap-3 hover:text-white">
+                                        <Phone className="w-4 h-4 text-[#008CBA]" /> {CONTACT_INFO.phone}
+                                    </a>
+                                    <a href={`mailto:${CONTACT_INFO.email}`} className="flex items-center gap-3 hover:text-white">
+                                        <Mail className="w-4 h-4 text-[#008CBA]" /> {CONTACT_INFO.email}
+                                    </a>
+                                </div>
                                 <div className="h-px bg-white/10 my-2" />
                                 <div className="flex gap-4">
                                     <Link href={CONTACT_INFO.socials.linkedin} className="text-gray-400 hover:text-white"><Linkedin className="w-5 h-5" /></Link>

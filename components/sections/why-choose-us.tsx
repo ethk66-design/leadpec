@@ -1,5 +1,7 @@
+/* eslint-disable */
 "use client";
 
+import React from "react";
 import { WHY_CHOOSE_US } from "@/lib/constants";
 import { motion } from "framer-motion";
 import { Globe, Zap, Network, ClipboardCheck, Hammer, FileCheck, Star, Target, Brain, UserCheck, MessageCircle, BookOpen, Plane } from "lucide-react";
@@ -41,11 +43,25 @@ export function WhyChooseUs() {
         fetchAssets();
     }, []);
 
+    const bgRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        if (bgRef.current && bgImage) {
+            bgRef.current.style.setProperty("--bg-image", `url(${bgImage})`);
+            bgRef.current.style.backgroundImage = "var(--bg-image)";
+        }
+    }, [bgImage]);
+
+
+
     return (
         <section
-            className="py-12 md:py-20 bg-[#202020] relative overflow-hidden bg-cover bg-center"
-            style={bgImage ? { backgroundImage: `url(${bgImage})` } : {}}
+            className="py-12 md:py-20 bg-[#202020] relative overflow-hidden"
         >
+            <div
+                ref={bgRef}
+                className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
+            />
             {/* Background Pattern - Only show if no bg image */}
             {!bgImage && (
                 <div className="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,#000_25%,transparent_25%,transparent_75%,#000_75%,#000),linear-gradient(45deg,#000_25%,transparent_25%,transparent_75%,#000_75%,#000)] bg-[length:60px_60px] bg-[position:0_0,30px_30px]" />

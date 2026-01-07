@@ -20,18 +20,18 @@ const iconMap: { [key: string]: React.ElementType } = {
 
 interface AboutContentProps {
     heroBg?: string;
-    missionImg?: string;
-    visionImg?: string;
+    collabImg?: string;
+    visionBg?: string;
 }
 
-export function AboutContent({ heroBg, missionImg, visionImg }: AboutContentProps) {
+export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps) {
     return (
         <main className="flex-1 bg-white">
             {/* 1. Hero Section (Industrial Dark) */}
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <DynamicImage
-                        src={heroBg || "/images/about-hero-team.png"}
+                        src={heroBg}
                         fallbackSrc="/images/about-hero-team.png"
                         alt="About Hero"
                         fill
@@ -125,8 +125,9 @@ export function AboutContent({ heroBg, missionImg, visionImg }: AboutContentProp
                         >
                             <div className="absolute inset-0 bg-[#0A2540] rounded-sm transform translate-x-4 translate-y-4" />
                             <div className="relative h-full w-full bg-white rounded-sm overflow-hidden shadow-xl border border-gray-200">
-                                <Image
-                                    src="/images/office-collaboration.png"
+                                <DynamicImage
+                                    src={collabImg}
+                                    fallbackSrc="/images/office-collaboration.png"
                                     alt="Leadpec Corporate Environment"
                                     fill
                                     className="object-cover"
@@ -144,8 +145,9 @@ export function AboutContent({ heroBg, missionImg, visionImg }: AboutContentProp
             <section className="py-16 md:py-24 bg-[#0A2540] relative overflow-hidden">
                 {/* Background Pattern */}
                 <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/images/vision-background.png"
+                    <DynamicImage
+                        src={visionBg}
+                        fallbackSrc="/images/vision-background.png"
                         alt="Vision Background"
                         fill
                         className="object-cover opacity-10 mix-blend-overlay"

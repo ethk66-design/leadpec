@@ -10,37 +10,38 @@ import { DynamicImage } from "@/components/ui/dynamic-image";
 interface SectorDetailHospitalityProps {
     sector: Sector;
     heroImage?: string;
+    images?: Record<string, string>;
 }
 
 const CUISINES = [
-    { name: "Italian Cuisine", image: "/images/cuisine-italian-dish.png", color: "from-green-600" },
-    { name: "Arabic Cuisine", image: "/images/cuisine-arabic-dish.png", color: "from-amber-600" },
-    { name: "Japanese Cuisine", image: "/images/cuisine-japanese-dish.png", color: "from-red-600" },
-    { name: "French Cuisine", image: "/images/cuisine-french-dish.jpg", color: "from-blue-600" },
-    { name: "Greek Cuisine", image: "/images/cuisine-greek-dish.jpg", color: "from-cyan-600" },
-    { name: "Thai Cuisine", image: "/images/cuisine-thai-dish.jpg", color: "from-orange-600" },
-    { name: "Spanish Cuisine", image: "/images/cuisine-spanish-dish.jpg", color: "from-yellow-600" },
-    { name: "Chinese Cuisine", image: "/images/cuisine-chinese-dish.jpg", color: "from-red-700" },
-    { name: "Indian Cuisine", image: "/images/cuisine-indian-dish.jpg", color: "from-orange-500" },
+    { name: "Italian Cuisine", image: "/images/cuisine-italian-dish.png", color: "from-green-600", key: "SECTOR_HOSPITALITY_CUISINE_ITALIAN" },
+    { name: "Arabic Cuisine", image: "/images/cuisine-arabic-dish.png", color: "from-amber-600", key: "SECTOR_HOSPITALITY_CUISINE_ARABIC" },
+    { name: "Japanese Cuisine", image: "/images/cuisine-japanese-dish.png", color: "from-red-600", key: "SECTOR_HOSPITALITY_CUISINE_JAPANESE" },
+    { name: "French Cuisine", image: "/images/cuisine-french-dish.jpg", color: "from-blue-600", key: "SECTOR_HOSPITALITY_CUISINE_FRENCH" },
+    { name: "Greek Cuisine", image: "/images/cuisine-greek-dish.jpg", color: "from-cyan-600", key: "SECTOR_HOSPITALITY_CUISINE_GREEK" },
+    { name: "Thai Cuisine", image: "/images/cuisine-thai-dish.jpg", color: "from-orange-600", key: "SECTOR_HOSPITALITY_CUISINE_THAI" },
+    { name: "Spanish Cuisine", image: "/images/cuisine-spanish-dish.jpg", color: "from-yellow-600", key: "SECTOR_HOSPITALITY_CUISINE_SPANISH" },
+    { name: "Chinese Cuisine", image: "/images/cuisine-chinese-dish.jpg", color: "from-red-700", key: "SECTOR_HOSPITALITY_CUISINE_CHINESE" },
+    { name: "Indian Cuisine", image: "/images/cuisine-indian-dish.jpg", color: "from-orange-500", key: "SECTOR_HOSPITALITY_CUISINE_INDIAN" },
 ];
 
-export function SectorDetailHospitality({ sector, heroImage }: SectorDetailHospitalityProps) {
+export function SectorDetailHospitality({ sector, heroImage, images }: SectorDetailHospitalityProps) {
     return (
         <main className="flex-1 bg-white">
             {/* 1. Cinematic Hero */}
             <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#0f172a]">
                 <div className="absolute inset-0 z-0 select-none">
                     <DynamicImage
-                        src="/images/hospitality-hero-luxury.png"
-                        fallbackSrc="/images/hospitality-hero-luxury.png"
+                        src={heroImage || "/images/hospitality-hero.png"}
+                        fallbackSrc="/images/hospitality-hero.png"
                         alt="Hospitality Hero"
                         fill
                         className="object-cover"
                         priority
                     />
                     {/* Elegant Navy/Blue Overlay */}
-                    <div className="absolute inset-0 bg-[#0f172a]/70 mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#0f172a]/40 to-transparent" />
+                    <div className="absolute inset-0 bg-[#0f172a]/30 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/70 via-[#0f172a]/20 to-transparent" />
                 </div>
 
                 <div className="container relative z-10 px-4">
@@ -57,7 +58,7 @@ export function SectorDetailHospitality({ sector, heroImage }: SectorDetailHospi
                             HOSPITALITY AND CATERING
                         </h1>
                         <p className="text-xl md:text-2xl text-blue-100 italic font-light mb-6 border-l-4 border-[#4DB6AC] pl-6">
-                            "Talent That Serves Excellence"
+                            &quot;Talent That Serves Excellence&quot;
                         </p>
                     </motion.div>
                 </div>
@@ -68,7 +69,7 @@ export function SectorDetailHospitality({ sector, heroImage }: SectorDetailHospi
                 <div className="container px-4">
                     <div className="max-w-4xl mx-auto text-center mb-16 space-y-6">
                         <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-light">
-                            We connect world class hospitality and catering professionals with hotels, resorts, restaurants, cruise liners, private estates, and event operators across every continent. From Europe's luxury capitals to the fast growing hospitality hubs of Asia, Africa, the Middle East, the Americas, and Oceania, we help businesses build teams that deliver memorable guest experiences.
+                            We connect world class hospitality and catering professionals with hotels, resorts, restaurants, cruise liners, private estates, and event operators across every continent. From Europe&apos;s luxury capitals to the fast growing hospitality hubs of Asia, Africa, the Middle East, the Americas, and Oceania, we help businesses build teams that deliver memorable guest experiences.
                         </p>
                         <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-light">
                             Our consultants are specialists in international hospitality hiring. We understand service standards, cultural expectations, culinary trends, and operational targets in every major market. This allows us to match skilled talent with organizations that value precision, professionalism, and authentic service.
@@ -93,7 +94,7 @@ export function SectorDetailHospitality({ sector, heroImage }: SectorDetailHospi
                                 >
                                     <div className="absolute inset-0 bg-slate-900">
                                         <DynamicImage
-                                            src={cuisine.image}
+                                            src={images?.[cuisine.key] || cuisine.image}
                                             fallbackSrc={`/images/placeholder-cuisine.png`}
                                             alt={cuisine.name}
                                             fill
@@ -149,7 +150,7 @@ export function SectorDetailHospitality({ sector, heroImage }: SectorDetailHospi
                                 Our approach is driven by data and guided by market knowledge. We track regional demand, salary patterns, seasonal hiring cycles, and international mobility trends.
                             </p>
                             <p className="text-slate-600 leading-relaxed border-l-4 border-blue-200 pl-4 py-1 italic bg-white rounded-r-lg">
-                                "Whether you need permanent talent, temporary staff, or full project teams, we deliver reliable recruitment solutions that support service excellence."
+                                &quot;Whether you need permanent talent, temporary staff, or full project teams, we deliver reliable recruitment solutions that support service excellence.&quot;
                             </p>
                         </div>
                     </div>
@@ -169,7 +170,7 @@ export function SectorDetailHospitality({ sector, heroImage }: SectorDetailHospi
                     {/* Closing */}
                     <div className="max-w-4xl mx-auto text-center pt-8 border-t border-slate-200">
                         <h3 className="text-2xl md:text-4xl font-bold text-[#004e92] font-heading leading-tight mb-6">
-                            "We help you build strong service teams that raise standards, enhance guest satisfaction, and drive performance across every level of your operation."
+                            &quot;We help you build strong service teams that raise standards, enhance guest satisfaction, and drive performance across every level of your operation.&quot;
                         </h3>
                         <p className="text-lg text-slate-500 font-light">
                             When you need a recruitment partner who understands global hospitality and can secure the right people in the right roles, we are the specialist team you can trust.

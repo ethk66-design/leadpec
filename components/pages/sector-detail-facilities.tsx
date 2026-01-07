@@ -10,23 +10,24 @@ import { DynamicImage } from "@/components/ui/dynamic-image";
 interface SectorDetailFacilitiesProps {
     sector: Sector;
     heroImage?: string;
+    images?: Record<string, string>;
 }
 
-export function SectorDetailFacilities({ sector, heroImage }: SectorDetailFacilitiesProps) {
+export function SectorDetailFacilities({ sector, heroImage, images }: SectorDetailFacilitiesProps) {
     return (
         <main className="flex-1 bg-white">
             {/* 1. Hero: Smart Building */}
             <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#005a9c]">
                 <div className="absolute inset-0 z-0 select-none">
                     <DynamicImage
-                        src="/images/fm-sector-hero.png"
-                        fallbackSrc="/images/fm-sector-hero.png"
+                        src={heroImage || "/images/fm-hero.png"}
+                        fallbackSrc="/images/fm-hero.png"
                         alt="Facilities Management Hero"
                         fill
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#004785]/90 via-[#005a9c]/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#004785]/70 via-[#005a9c]/30 to-transparent" />
                 </div>
 
                 <div className="container relative z-10 px-4">
@@ -40,7 +41,7 @@ export function SectorDetailFacilities({ sector, heroImage }: SectorDetailFacili
                             FACILITIES MANAGEMENT
                         </h1>
                         <p className="text-xl md:text-2xl text-blue-100 italic font-light mb-6">
-                            "Optimizing Spaces. Empowering People. Elevating Performance"
+                            &quot;Optimizing Spaces. Empowering People. Elevating Performance&quot;
                         </p>
                     </motion.div>
                 </div>
@@ -135,13 +136,13 @@ export function SectorDetailFacilities({ sector, heroImage }: SectorDetailFacili
                             </ul>
                             <div className="bg-white p-6 rounded-lg border-l-4 border-[#005a9c] shadow-sm">
                                 <p className="text-slate-600 text-sm leading-relaxed italic">
-                                    "Hard services are the technical foundation that keeps a facility running safely, efficiently, and sustainably. By combining engineering expertise with digital automation, organizations can shift from reactive maintenance to predictive management."
+                                    &quot;Hard services are the technical foundation that keeps a facility running safely, efficiently, and sustainably. By combining engineering expertise with digital automation, organizations can shift from reactive maintenance to predictive management.&quot;
                                 </p>
                             </div>
                         </div>
                         <div className="order-1 md:order-2 relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
                             <Image
-                                src="/images/fm-hard-services-engineer.png"
+                                src={images?.["SECTOR_FACILITIES_FEATURE_1"] || "/images/fm-hard-services-engineer.png"}
                                 alt="Hard Services Maintenance"
                                 fill
                                 className="object-cover"
@@ -153,7 +154,7 @@ export function SectorDetailFacilities({ sector, heroImage }: SectorDetailFacili
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
                             <Image
-                                src="/images/fm-soft-services-lobby.png"
+                                src={images?.["SECTOR_FACILITIES_FEATURE_2"] || "/images/fm-soft-services-lobby.png"}
                                 alt="Soft Services Hospitality"
                                 fill
                                 className="object-cover"
@@ -220,7 +221,7 @@ export function SectorDetailFacilities({ sector, heroImage }: SectorDetailFacili
                                 <p className="text-sm text-gray-300">Commitment to efficiency and workplace satisfaction.</p>
                             </div>
                         </div>
-                        <h3 className="text-2xl font-bold mt-12 text-[#4DB6AC] italic">"Your Facilities. Our Talent. Exceptional Results."</h3>
+                        <h3 className="text-2xl font-bold mt-12 text-[#4DB6AC] italic">&quot;Your Facilities. Our Talent. Exceptional Results.&quot;</h3>
                     </div>
 
                 </div>

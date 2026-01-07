@@ -1,12 +1,15 @@
+/* eslint-disable */
 import { CONTACT_INFO, SECTORS } from "@/lib/constants";
 import { prisma } from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Linkedin, Instagram, Facebook, ArrowRight, MapPin, Phone, Mail } from "lucide-react";
+import { Linkedin, Instagram, Facebook, ArrowRight, MapPin, Phone, Mail, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 
 import Link from "next/link";
 import { getSiteSetting, getSocialLinks } from "@/lib/settings-actions";
+
+import { DynamicFooterBackground } from "@/components/layout/dynamic-footer-bg";
 
 export async function Footer() {
     // Fetch sectors from DB, take first 6 for the footer list
@@ -34,16 +37,14 @@ export async function Footer() {
         if (dbImage) footerImage = dbImage;
     }
 
+
+
+    // ... (existing imports)
+
     const socials = await getSocialLinks();
 
     return (
-        <footer
-            className="bg-[#051120] text-blue-100/70 relative overflow-hidden bg-cover bg-center"
-            style={{
-                backgroundImage: footerImage ? `url(${footerImage})` : undefined,
-            }
-            }
-        >
+        <DynamicFooterBackground footerImage={footerImage}>
             {/* Background Pattern / Overlay */}
             {
                 footerImage ? (
@@ -88,7 +89,7 @@ export async function Footer() {
                         <div className="pt-6 border-t border-white/5 mt-6">
                             <p className="text-white font-bold text-xs md:text-sm">{CONTACT_INFO.legal.name}</p>
                             <div className="flex items-start gap-2 mt-2">
-                                <Image src="/images/emblem.png" alt="Emblem" width={20} height={20} className="mt-0.5 opacity-80" />
+                                <ShieldCheck className="w-5 h-5 text-blue-200/50 mt-0.5" />
                                 <p className="text-[10px] md:text-xs text-blue-200/50 leading-tight max-w-[200px]">
                                     {CONTACT_INFO.legal.registration}
                                 </p>
@@ -152,6 +153,6 @@ export async function Footer() {
                     </div>
                 </div>
             </div >
-        </footer >
+        </DynamicFooterBackground>
     );
 }

@@ -10,6 +10,7 @@ import { DynamicImage } from "@/components/ui/dynamic-image";
 interface SectorDetailHeavyEquipmentProps {
     sector: Sector;
     heroImage?: string;
+    images?: Record<string, string>;
 }
 
 const OPERATORS = [
@@ -24,23 +25,23 @@ const OPERATORS = [
     { name: "Paver", icon: Ruler },
 ];
 
-export function SectorDetailHeavyEquipment({ sector, heroImage }: SectorDetailHeavyEquipmentProps) {
+export function SectorDetailHeavyEquipment({ sector, heroImage, images }: SectorDetailHeavyEquipmentProps) {
     return (
         <main className="flex-1 bg-white">
             {/* 1. Hero: Standard Corporate Blue Theme */}
             <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#0c4a6e]">
                 <div className="absolute inset-0 z-0 select-none">
                     <DynamicImage
-                        src={heroImage || "/images/heavy-equipment-hero-site.png"}
-                        fallbackSrc="/images/heavy-equipment-hero-site.png"
+                        src={heroImage || "/images/heavy-equipment-hero-v2.png"}
+                        fallbackSrc="/images/heavy-equipment-hero-v2.png"
                         alt="Heavy Equipment Hero"
                         fill
                         className="object-cover"
                         priority
                     />
                     {/* Corporate Blue Overlay */}
-                    <div className="absolute inset-0 bg-[#0c4a6e]/50 mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0c4a6e]/90 via-[#0c4a6e]/40 to-transparent" />
+                    <div className="absolute inset-0 bg-[#0c4a6e]/20 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0c4a6e]/70 via-[#0c4a6e]/20 to-transparent" />
                 </div>
 
                 <div className="container relative z-10 px-4">
@@ -57,7 +58,7 @@ export function SectorDetailHeavyEquipment({ sector, heroImage }: SectorDetailHe
                             HEAVY & CONSTRUCTION <br /> <span className="text-[#4DB6AC]">EQUIPMENT</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-blue-100 italic font-light mb-6 border-l-4 border-[#4DB6AC] pl-6">
-                            "Operators That Move Projects Forward"
+                            &quot;Operators That Move Projects Forward&quot;
                         </p>
                     </motion.div>
                 </div>
@@ -86,7 +87,7 @@ export function SectorDetailHeavyEquipment({ sector, heroImage }: SectorDetailHe
                         {/* Image Split */}
                         <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl skew-x-[-3deg] border-r-8 border-[#008CBA]">
                             <Image
-                                src="/images/heavy-equipment-fleet-modern.png"
+                                src={images?.["SECTOR_HEAVY_EQUIPMENT_INTRO_1"] || "/images/heavy-equipment-fleet-modern.png"}
                                 alt="Heavy Machinery Fleet"
                                 fill
                                 className="object-cover skew-x-[3deg] scale-110"
@@ -155,7 +156,7 @@ export function SectorDetailHeavyEquipment({ sector, heroImage }: SectorDetailHe
                             </div>
                             <div className="relative h-[300px] border-4 border-[#4DB6AC] rounded-xl overflow-hidden">
                                 <Image
-                                    src="/images/heavy-equipment-safety-inspection.png"
+                                    src={images?.["SECTOR_HEAVY_EQUIPMENT_FEATURE_1"] || "/images/heavy-equipment-safety-inspection.png"}
                                     alt="Safety Inspection"
                                     fill
                                     className="object-cover"

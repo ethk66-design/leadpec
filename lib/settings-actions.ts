@@ -16,8 +16,18 @@ export async function getSiteSetting(key: string) {
     }
 }
 
+import { requireAuth } from "@/lib/auth-utils";
+
 export async function updateSiteSetting(key: string, value: string) {
     if (!prisma) return { error: "Database not available" };
+
+    // Security Check
+    try {
+        await requireAuth();
+    } catch (e) {
+        return { error: "Unauthorized" };
+    }
+
     try {
         await prisma.siteSetting.upsert({
             where: { key },

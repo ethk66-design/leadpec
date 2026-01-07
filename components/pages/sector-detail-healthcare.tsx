@@ -10,24 +10,25 @@ import { DynamicImage } from "@/components/ui/dynamic-image";
 interface SectorDetailHealthcareProps {
     sector: Sector;
     heroImage?: string;
+    images?: Record<string, string>;
 }
 
-export function SectorDetailHealthcare({ sector, heroImage }: SectorDetailHealthcareProps) {
+export function SectorDetailHealthcare({ sector, heroImage, images }: SectorDetailHealthcareProps) {
     return (
         <main className="flex-1 bg-white">
             {/* 1. Hero */}
             <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#0a2540]">
                 <div className="absolute inset-0 z-0 select-none">
                     <DynamicImage
-                        src={heroImage || "/images/healthcare-hero.png"}
-                        fallbackSrc="/images/healthcare-hero.png"
+                        src={heroImage || "/images/healthcare-facility.png"}
+                        fallbackSrc="/images/healthcare-facility.png"
                         alt="Healthcare Hero"
                         fill
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-[#0a2540]/80 mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0e7c7b]/90 via-[#0a2540]/60 to-transparent" />
+                    <div className="absolute inset-0 bg-[#0a2540]/30 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0e7c7b]/70 via-[#0a2540]/30 to-transparent" />
                 </div>
 
                 <div className="container relative z-10 px-4">
@@ -44,7 +45,7 @@ export function SectorDetailHealthcare({ sector, heroImage }: SectorDetailHealth
                             HEALTHCARE & <br /> PHARMACEUTICAL
                         </h1>
                         <p className="text-xl md:text-2xl text-teal-50 italic font-light mb-6 border-l-4 border-[#4DB6AC] pl-6">
-                            "Talent That Heals. Teams That Deliver"
+                            &quot;Talent That Heals. Teams That Deliver&quot;
                         </p>
                     </motion.div>
                 </div>
@@ -69,7 +70,7 @@ export function SectorDetailHealthcare({ sector, heroImage }: SectorDetailHealth
                         <div className="relative h-[500px] w-full">
                             <div className="absolute top-0 right-0 w-4/5 h-4/5 z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
                                 <Image
-                                    src="/images/healthcare-team-modern.png"
+                                    src={images?.["SECTOR_HEALTHCARE_INTRO_1"] || "/images/healthcare-team-modern.png"}
                                     alt="Medical Team"
                                     fill
                                     className="object-cover"
@@ -78,7 +79,7 @@ export function SectorDetailHealthcare({ sector, heroImage }: SectorDetailHealth
                             </div>
                             <div className="absolute bottom-0 left-0 w-3/5 h-3/5 z-20 rounded-2xl overflow-hidden shadow-2xl border-4 border-[#4DB6AC]">
                                 <Image
-                                    src="/images/healthcare-consultation.png"
+                                    src={images?.["SECTOR_HEALTHCARE_INTRO_2"] || "/images/healthcare-consultation.png"}
                                     alt="Consultation"
                                     fill
                                     className="object-cover"
@@ -154,7 +155,7 @@ export function SectorDetailHealthcare({ sector, heroImage }: SectorDetailHealth
                     <div className="bg-[#0B1B32] rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
                         <div className="md:w-1/2 relative min-h-[400px]">
                             <Image
-                                src="/images/healthcare-lab-facility.png"
+                                src={images?.["SECTOR_HEALTHCARE_FEATURE_1"] || "/images/healthcare-lab-facility.png"}
                                 alt="Modern Laboratory"
                                 fill
                                 className="object-cover opacity-90"
@@ -195,7 +196,7 @@ export function SectorDetailHealthcare({ sector, heroImage }: SectorDetailHealth
             <section className="py-20 bg-[#f8fafc]">
                 <div className="container px-4 text-center max-w-4xl mx-auto">
                     <h2 className="text-3xl md:text-4xl font-bold text-[#0B1B32] mb-8 font-heading">
-                        "Trusted for Speed, Accuracy, and Integrity"
+                        &quot;Trusted for Speed, Accuracy, and Integrity&quot;
                     </h2>
                     <p className="text-xl text-slate-600 leading-relaxed mb-10">
                         Clients choose us for our industry expertise. We secure individuals who meet competency requirements and fit the culture and mission of each organization. With global reach and a commitment to high standards, we deliver a recruitment partnership that strengthens teams and supports safe, effective, and innovative work.

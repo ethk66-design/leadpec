@@ -10,9 +10,10 @@ import { DynamicImage } from "@/components/ui/dynamic-image";
 interface SectorDetailEnergyProps {
     sector: Sector;
     heroImage?: string;
+    images?: Record<string, string>;
 }
 
-export function SectorDetailEnergy({ sector, heroImage }: SectorDetailEnergyProps) {
+export function SectorDetailEnergy({ sector, heroImage, images }: SectorDetailEnergyProps) {
     return (
         <main className="flex-1">
             {/* 1. Cinematic Hero */}
@@ -26,7 +27,7 @@ export function SectorDetailEnergy({ sector, heroImage }: SectorDetailEnergyProp
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0B1B32]/90 via-[#0B1B32]/70 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0B1B32]/70 via-[#0B1B32]/30 to-transparent" />
                 </div>
 
                 <div className="container relative z-10 px-4">
@@ -65,7 +66,7 @@ export function SectorDetailEnergy({ sector, heroImage }: SectorDetailEnergyProp
                         </div>
                         <div className="order-1 lg:order-2 relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
                             <Image
-                                src="/images/eng-plan-meeting.png"
+                                src={images?.["SECTOR_ENERGY_INTRO_IMAGE"] || "/images/eng-plan-meeting.png"}
                                 alt="Engineering Meeting"
                                 fill
                                 className="object-cover"
@@ -143,7 +144,7 @@ export function SectorDetailEnergy({ sector, heroImage }: SectorDetailEnergyProp
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0 select-none">
                     <Image
-                        src="/images/sectors-hero-skyline.png"
+                        src={images?.["SECTOR_ENERGY_BG_IMAGE"] || "/images/sectors-hero-skyline.png"}
                         alt="Energy Background"
                         fill
                         className="object-cover"

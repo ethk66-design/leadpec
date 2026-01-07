@@ -10,9 +10,10 @@ import { DynamicImage } from "@/components/ui/dynamic-image";
 interface SectorDetailOMProps {
     sector: Sector;
     heroImage?: string;
+    images?: Record<string, string>;
 }
 
-export function SectorDetailOM({ sector, heroImage }: SectorDetailOMProps) {
+export function SectorDetailOM({ sector, heroImage, images }: SectorDetailOMProps) {
     return (
         <main className="flex-1 bg-white">
             {/* 1. Hero */}
@@ -26,7 +27,7 @@ export function SectorDetailOM({ sector, heroImage }: SectorDetailOMProps) {
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f]/90 via-[#001f3f]/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f]/70 via-[#001f3f]/30 to-transparent" />
                 </div>
 
                 <div className="container relative z-10 px-4">
@@ -43,7 +44,7 @@ export function SectorDetailOM({ sector, heroImage }: SectorDetailOMProps) {
                             OPERATION AND MAINTENANCE
                         </h1>
                         <p className="text-xl md:text-2xl text-blue-100 italic font-light mb-6 border-l-4 border-[#4DB6AC] pl-6">
-                            "Maintenence That Powers Success"
+                            &quot;Maintenence That Powers Success&quot;
                         </p>
                     </motion.div>
                 </div>
@@ -65,7 +66,7 @@ export function SectorDetailOM({ sector, heroImage }: SectorDetailOMProps) {
                     <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
                         <div className="order-2 lg:order-1 relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
                             <Image
-                                src="/images/om-industrial-maintenance.png"
+                                src={images?.["SECTOR_OM_INTRO_1"] || "/images/om-industrial-maintenance.png"}
                                 alt="Industrial Maintenance"
                                 fill
                                 className="object-cover"
@@ -115,7 +116,7 @@ export function SectorDetailOM({ sector, heroImage }: SectorDetailOMProps) {
                             <Wrench className="w-12 h-12 text-[#4DB6AC] mx-auto opacity-50" />
                         </div>
                         <p className="text-2xl md:text-3xl text-[#0B1B32] font-medium leading-relaxed italic mb-8 font-heading">
-                            "Maintenance is the backbone of every industrial facility. The quality of your workforce defines the stability of your operations."
+                            &quot;Maintenance is the backbone of every industrial facility. The quality of your workforce defines the stability of your operations.&quot;
                         </p>
                         <p className="text-lg text-slate-600">
                             With the right team, you improve uptime, control failures, and operate with confidence.

@@ -3,10 +3,12 @@
 import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { requireAuth } from "@/lib/auth-utils";
 
 export async function updateInquiryStatus(id: string, status: string) {
     if (!prisma) return { error: "Database not available" };
     try {
+        await requireAuth();
         await prisma.inquiry.update({
             where: { id },
             data: { status }
@@ -21,6 +23,7 @@ export async function updateInquiryStatus(id: string, status: string) {
 export async function updateApplicationStatus(id: string, status: string) {
     if (!prisma) return { error: "Database not available" };
     try {
+        await requireAuth();
         await prisma.application.update({
             where: { id },
             data: { status }
@@ -35,6 +38,7 @@ export async function updateApplicationStatus(id: string, status: string) {
 export async function deleteInquiry(id: string) {
     if (!prisma) return { error: "Database not available" };
     try {
+        await requireAuth();
         await prisma.inquiry.delete({ where: { id } });
         revalidatePath('/admin/inquiries');
         return { success: "Deleted" };
@@ -46,6 +50,7 @@ export async function deleteInquiry(id: string) {
 export async function deleteApplication(id: string) {
     if (!prisma) return { error: "Database not available" };
     try {
+        await requireAuth();
         await prisma.application.delete({ where: { id } });
         revalidatePath('/admin/applications');
         return { success: "Deleted" };
@@ -57,6 +62,7 @@ export async function deleteApplication(id: string) {
 export async function deleteJob(id: string) {
     if (!prisma) return { error: "Database not available" };
     try {
+        await requireAuth();
         await prisma.job.delete({ where: { id } });
         revalidatePath('/admin/jobs');
         revalidatePath('/careers');
@@ -83,6 +89,12 @@ export async function toggleJobStatus(id: string, isActive: boolean) {
 
 export async function createJob(formData: FormData) {
     if (!prisma) return { error: "Database not available" };
+
+    try {
+        await requireAuth();
+    } catch (e) {
+        return { error: "Unauthorized" };
+    }
 
     const title = formData.get("title") as string;
     const department = formData.get("department") as string;
@@ -118,6 +130,12 @@ export async function createJob(formData: FormData) {
 export async function updateJob(id: string, formData: FormData) {
     if (!prisma) return { error: "Database not available" };
 
+    try {
+        await requireAuth();
+    } catch (e) {
+        return { error: "Unauthorized" };
+    }
+
     const title = formData.get("title") as string;
     const department = formData.get("department") as string;
     const location = formData.get("location") as string;
@@ -130,6 +148,7 @@ export async function updateJob(id: string, formData: FormData) {
     }
 
     try {
+        // Fix: Use data object directly
         await prisma.job.update({
             where: { id },
             data: {

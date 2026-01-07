@@ -13,11 +13,11 @@ import { Loader2 } from "lucide-react";
 import { Post } from "@prisma/client";
 
 const formSchema = z.object({
-    title: z.string().min(2, "Title is required"),
+    title: z.string().min(2, "Title is required").max(100, "Title is too long (max 100 chars)"),
     slug: z.string().min(2, "Slug is required").regex(/^[a-z0-9-]+$/, "Slug must be lowercase alphanumeric with hyphens"),
     content: z.string().min(10, "Content is too short"),
     image: z.string().optional(),
-    author: z.string().min(2, "Author is required"),
+    author: z.string().min(2, "Author is required").max(50, "Author name is too long"),
     published: z.boolean().optional(),
 });
 
@@ -93,8 +93,15 @@ export function PostForm({ initialData }: PostFormProps) {
                         onChange={(e) => {
                             form.register("title").onChange(e);
                             handleTitleChange(e);
+                            handleTitleChange(e);
                         }}
                     />
+                    <div className="flex justify-between text-xs text-gray-400">
+                        <span>Min 2, Max 100 characters</span>
+                        <span className={form.watch("title")?.length > 100 ? "text-red-500" : ""}>
+                            {form.watch("title")?.length || 0}/100
+                        </span>
+                    </div>
                     {form.formState.errors.title && (
                         <p className="text-sm text-red-500">{form.formState.errors.title.message}</p>
                     )}

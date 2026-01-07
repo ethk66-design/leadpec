@@ -7,12 +7,14 @@ import { Toaster } from "sonner";
 const titillium = Titillium_Web({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
-  variable: "--font-heading"
+  variable: "--font-heading",
+  display: "swap",
 });
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  variable: "--font-sans"
+  variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {

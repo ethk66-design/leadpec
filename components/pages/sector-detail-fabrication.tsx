@@ -10,6 +10,7 @@ import { DynamicImage } from "@/components/ui/dynamic-image";
 interface SectorDetailFabricationProps {
     sector: Sector;
     heroImage?: string;
+    images?: Record<string, string>;
 }
 
 const CERTS = [
@@ -19,23 +20,23 @@ const CERTS = [
     { name: "ISO", desc: "International Standards", icon: ShieldCheck },
 ];
 
-export function SectorDetailFabrication({ sector, heroImage }: SectorDetailFabricationProps) {
+export function SectorDetailFabrication({ sector, heroImage, images }: SectorDetailFabricationProps) {
     return (
         <main className="flex-1 bg-white">
             {/* 1. Industrial Strength Hero */}
             <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#1a202c]">
                 <div className="absolute inset-0 z-0 select-none">
                     <DynamicImage
-                        src={heroImage || "/images/fabrication-hero-industrial.png"}
-                        fallbackSrc="/images/fabrication-hero-industrial.png"
+                        src={heroImage || "/images/fabrication-hero-v3.png"}
+                        fallbackSrc="/images/fabrication-hero-v3.png"
                         alt="Fabrication Hero"
                         fill
                         className="object-cover"
                         priority
                     />
                     {/* Dark Industrial Overlay */}
-                    <div className="absolute inset-0 bg-[#002f5f]/70 mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f] via-transparent to-[#001f3f]/50" />
+                    <div className="absolute inset-0 bg-[#002f5f]/30 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f] via-transparent to-transparent" />
                 </div>
 
                 <div className="container relative z-10 px-4">
@@ -52,7 +53,7 @@ export function SectorDetailFabrication({ sector, heroImage }: SectorDetailFabri
                             FABRICATION & <br /> TECHNICAL SERVICES
                         </h1>
                         <p className="text-xl md:text-2xl text-blue-100 italic font-light mb-6 border-l-4 border-[#fb923c] pl-6">
-                            "Strong Structures, Skilled Hands"
+                            &quot;Strong Structures, Skilled Hands&quot;
                         </p>
                     </motion.div>
                 </div>
@@ -64,7 +65,7 @@ export function SectorDetailFabrication({ sector, heroImage }: SectorDetailFabri
                     <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
                         <div className="order-2 lg:order-1 relative h-[500px] rounded-2xl overflow-hidden shadow-2xl border-b-8 border-[#fb923c]">
                             <Image
-                                src="/images/fabrication-welder-professional.png"
+                                src={images?.["SECTOR_FABRICATION_FEATURE_1"] || "/images/fabrication-welder-professional.png"}
                                 alt="Welder at work"
                                 fill
                                 className="object-cover"

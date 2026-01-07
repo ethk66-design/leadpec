@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
+import { updateSiteSetting } from "@/lib/settings-actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
 import { ImageUpload } from "@/components/ui/image-upload";
-import { updateSiteSetting } from "@/lib/settings-actions";
 
 interface SettingsFormProps {
     footerImage: string | null;
@@ -14,90 +16,116 @@ interface SettingsFormProps {
     instagramUrl: string | null;
 }
 
-export function SettingsForm({ footerImage, linkedinUrl, facebookUrl, instagramUrl }: SettingsFormProps) {
+export function SettingsForm({
+    footerImage,
+    linkedinUrl,
+    facebookUrl,
+    instagramUrl
+}: SettingsFormProps) {
     const [isPending, startTransition] = useTransition();
-    const [message, setMessage] = useState<{ text: string, type: 'success' | 'error' } | null>(null);
 
-    const [image, setImage] = useState(footerImage || "");
+    // Local state for inputs
     const [linkedin, setLinkedin] = useState(linkedinUrl || "");
     const [facebook, setFacebook] = useState(facebookUrl || "");
     const [instagram, setInstagram] = useState(instagramUrl || "");
 
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        setMessage(null);
-
+    const handleSaveSocials = () => {
         startTransition(async () => {
-            // Save all settings
-            await updateSiteSetting("footer_image", image);
-            await updateSiteSetting("social_linkedin", linkedin);
-            await updateSiteSetting("social_facebook", facebook);
-            await updateSiteSetting("social_instagram", instagram);
+            const results = await Promise.all([
+                updateSiteSetting("social_linkedin", linkedin),
+                updateSiteSetting("social_facebook", facebook),
+                updateSiteSetting("social_instagram", instagram)
+            ]);
 
-            setMessage({ text: "Settings saved successfully!", type: 'success' });
+            const errors = results.filter(r => r.error);
+            if (errors.length > 0) {
+                toast.error("Failed to update some settings.");
+            } else {
+                toast.success("Social links updated successfully!");
+            }
         });
-    }
+    };
+
+    const handleFooterImageChange = (url: string) => {
+        startTransition(async () => {
+            const res = await updateSiteSetting("footer_image", url);
+            if (res.error) {
+                toast.error(res.error);
+            } else {
+                toast.success("Footer image updated!");
+            }
+        });
+    };
+
+    const handleRemoveFooterImage = () => {
+        handleFooterImageChange("");
+    };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-8 max-w-4xl">
-            {/* Footer Section */}
-            <div className="bg-white p-6 rounded-lg border space-y-4">
-                <h3 className="text-lg font-medium">Footer Configuration</h3>
-                <ImageUpload
-                    value={image}
-                    onChange={setImage}
-                    label="Footer Background Image"
-                    description="This image will appear as the background for the website footer."
-                />
-            </div>
-
-            {/* Social Media Section */}
-            <div className="bg-white p-6 rounded-lg border space-y-4">
-                <h3 className="text-lg font-medium">Social Media Links</h3>
-                <p className="text-sm text-muted-foreground">Update the social media URLs displayed in the header and footer.</p>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="space-y-6">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Branding & Images</CardTitle>
+                    <CardDescription>
+                        Set global images for the website.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
                     <div className="space-y-2">
-                        <label htmlFor="linkedin" className="text-sm font-medium">LinkedIn URL</label>
+                        <Label>Footer Background Image</Label>
+                        <ImageUpload
+                            value={footerImage || ""}
+                            onChange={handleFooterImageChange}
+                            label="Footer Background Image"
+                            disabled={isPending}
+                        />
+                    </div>
+                </CardContent>
+            </Card>
+
+            <Card>
+                <CardHeader>
+                    <CardTitle>Social Media Links</CardTitle>
+                    <CardDescription>
+                        Update links to your social profiles.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="linkedin">LinkedIn URL</Label>
                         <Input
                             id="linkedin"
+                            placeholder="https://linkedin.com/company/..."
                             value={linkedin}
                             onChange={(e) => setLinkedin(e.target.value)}
-                            placeholder="https://linkedin.com/company/..."
+                            disabled={isPending}
                         />
                     </div>
                     <div className="space-y-2">
-                        <label htmlFor="facebook" className="text-sm font-medium">Facebook URL</label>
+                        <Label htmlFor="facebook">Facebook URL</Label>
                         <Input
                             id="facebook"
+                            placeholder="https://facebook.com/..."
                             value={facebook}
                             onChange={(e) => setFacebook(e.target.value)}
-                            placeholder="https://facebook.com/..."
+                            disabled={isPending}
                         />
                     </div>
                     <div className="space-y-2">
-                        <label htmlFor="instagram" className="text-sm font-medium">Instagram URL</label>
+                        <Label htmlFor="instagram">Instagram URL</Label>
                         <Input
                             id="instagram"
+                            placeholder="https://instagram.com/..."
                             value={instagram}
                             onChange={(e) => setInstagram(e.target.value)}
-                            placeholder="https://instagram.com/..."
+                            disabled={isPending}
                         />
                     </div>
-                </div>
-            </div>
-
-            {message && (
-                <div className={`p-3 rounded-md text-sm ${message.type === 'success' ? 'bg-green-500/10 text-green-600' : 'bg-red-500/10 text-red-600'}`}>
-                    {message.text}
-                </div>
-            )}
-
-            <div className="flex gap-4">
-                <Button type="submit" disabled={isPending}>
-                    {isPending ? "Saving..." : "Save All Settings"}
-                </Button>
-            </div>
-        </form>
+                    <Button onClick={handleSaveSocials} disabled={isPending}>
+                        {isPending ? "Saving..." : "Save Social Links"}
+                    </Button>
+                </CardContent>
+            </Card>
+        </div>
     );
 }

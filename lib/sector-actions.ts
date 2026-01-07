@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { requireAuth } from "@/lib/auth-utils";
 
 const SectorSchema = z.object({
     title: z.string().min(1, "Title is required"),
@@ -18,6 +19,12 @@ const SectorSchema = z.object({
 });
 
 export async function updateSector(id: string, formData: FormData) {
+    try {
+        await requireAuth();
+    } catch {
+        return { error: "Unauthorized" };
+    }
+
     const validatedFields = SectorSchema.safeParse({
         title: formData.get("title"),
         slug: formData.get("slug"),
@@ -66,6 +73,12 @@ export async function updateSector(id: string, formData: FormData) {
 }
 
 export async function createSector(formData: FormData) {
+    try {
+        await requireAuth();
+    } catch {
+        return { error: "Unauthorized" };
+    }
+
     const validatedFields = SectorSchema.safeParse({
         title: formData.get("title"),
         slug: formData.get("slug"),
@@ -114,6 +127,7 @@ export async function createSector(formData: FormData) {
 export async function deleteSector(id: string) {
     if (!prisma) return { error: "Database not available" };
     try {
+        await requireAuth();
         await prisma.sector.delete({
             where: { id }
         });

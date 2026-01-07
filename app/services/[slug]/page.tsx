@@ -103,7 +103,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailProps) 
         assetKey = 'SERVICE_CONTRACT_IMG';
         fallbackImg = '/images/service-contract-site.png';
     } else if (service.slug === 'short-term-staffing') {
-        assetKey = 'SERVICE_CONTRACT_IMG';
+        assetKey = 'SERVICE_SHORT_TERM_IMG';
         fallbackImg = '/images/service-contract-site.png';
     }
 
@@ -208,7 +208,13 @@ export default async function ServiceDetailPage({ params }: ServiceDetailProps) 
                                                                         service.slug === 'executive-search' && index === 0 ? "Executive Decision" :
                                                                             service.slug === 'executive-search' && index === 1 ? "Global Influence" :
                                                                                 service.slug === 'executive-search' && index === 2 ? "Trust & Discretion" :
-                                                                                    `Concept ${index + 1}`}
+                                                                                    service.slug === 'contract-staffing' && index === 0 ? "Project Agility" :
+                                                                                        service.slug === 'contract-staffing' && index === 1 ? "Scalable Workforce" :
+                                                                                            service.slug === 'contract-staffing' && index === 2 ? "Compliance Assurance" :
+                                                                                                service.slug === 'short-term-staffing' && index === 0 ? "Rapid Mobilization" :
+                                                                                                    service.slug === 'short-term-staffing' && index === 1 ? "Peak Optimization" :
+                                                                                                        service.slug === 'short-term-staffing' && index === 2 ? "Targeted Expertise" :
+                                                                                                            `Concept ${index + 1}`}
                                                         </span>
                                                         <span className="text-gray-300 text-xs uppercase tracking-widest mt-1 block">
                                                             {service.slug === 'permanent-hire' && index === 0 ? "Boardroom & Strategy" :
@@ -217,7 +223,13 @@ export default async function ServiceDetailPage({ params }: ServiceDetailProps) 
                                                                         service.slug === 'executive-search' && index === 0 ? "Boardroom Strategy" :
                                                                             service.slug === 'executive-search' && index === 1 ? "International Vision" :
                                                                                 service.slug === 'executive-search' && index === 2 ? "Confidentiality" :
-                                                                                    "Service Insight"}
+                                                                                    service.slug === 'contract-staffing' && index === 0 ? "Speed & Efficiency" :
+                                                                                        service.slug === 'contract-staffing' && index === 1 ? "Flexible Staffing" :
+                                                                                            service.slug === 'contract-staffing' && index === 2 ? "Risk Mitigation" :
+                                                                                                service.slug === 'short-term-staffing' && index === 0 ? "Immediate Response" :
+                                                                                                    service.slug === 'short-term-staffing' && index === 1 ? "Seasonal Support" :
+                                                                                                        service.slug === 'short-term-staffing' && index === 2 ? "Project Specific" :
+                                                                                                            "Service Insight"}
                                                         </span>
                                                     </div>
                                                 </div>

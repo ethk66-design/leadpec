@@ -10,23 +10,24 @@ import { DynamicImage } from "@/components/ui/dynamic-image";
 interface SectorDetailOilGasProps {
     sector: Sector;
     heroImage?: string;
+    images?: Record<string, string>;
 }
 
-export function SectorDetailOilGas({ sector, heroImage }: SectorDetailOilGasProps) {
+export function SectorDetailOilGas({ sector, heroImage, images }: SectorDetailOilGasProps) {
     return (
         <main className="flex-1 bg-white">
             {/* 1. Cinematic Hero */}
             <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#0c4a6e]">
                 <div className="absolute inset-0 z-0 select-none">
                     <DynamicImage
-                        src={heroImage || "/images/oil-gas-hero-refinery.png"}
-                        fallbackSrc="/images/oil-gas-hero-refinery.png"
+                        src={heroImage || "/images/oil-gas-hero.png"}
+                        fallbackSrc="/images/oil-gas-hero.png"
                         alt="Oil & Gas Hero"
                         fill
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0c4a6e]/90 via-[#0c4a6e]/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0c4a6e]/70 via-[#0c4a6e]/20 to-transparent" />
                 </div>
 
                 <div className="container relative z-10 px-4">
@@ -79,7 +80,7 @@ export function SectorDetailOilGas({ sector, heroImage }: SectorDetailOilGasProp
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div className="relative h-[400px] rounded-xl overflow-hidden shadow-xl order-2 lg:order-1">
                             <Image
-                                src="/images/oil-gas-operations-unified.png"
+                                src={images?.["SECTOR_OIL_GAS_INTRO_1"] || "/images/oil-gas-operations-unified.png"}
                                 alt="Integrated Approach"
                                 fill
                                 className="object-cover"
@@ -91,7 +92,7 @@ export function SectorDetailOilGas({ sector, heroImage }: SectorDetailOilGasProp
                                 LEADPEC unifies talent across upstream, mid-stream, and downstream operations to deliver smooth, efficient project execution. We offer a fully integrated approach, covering everything from exploration and production to transportation and refining.
                             </p>
                             <p className="text-lg text-slate-600 leading-relaxed border-l-4 border-[#4DB6AC] pl-6 italic">
-                                "Our rigorous recruitment process ensures top-tier talent, giving clients a strategic, cohesive solution that boosts performance and results."
+                                &quot;Our rigorous recruitment process ensures top-tier talent, giving clients a strategic, cohesive solution that boosts performance and results.&quot;
                             </p>
                         </div>
                     </div>

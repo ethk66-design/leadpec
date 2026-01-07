@@ -7,13 +7,16 @@ import { TrustIndicators } from "@/components/sections/trust-indicators";
 import { AboutBrief } from "@/components/sections/about-brief";
 import { ServicesOverview } from "@/components/sections/services-overview";
 import { SectorsGrid } from "@/components/sections/sectors-grid";
-import { WhyChooseUs } from "@/components/sections/why-choose-us";
-import { GlobalPresence } from "@/components/sections/global-presence";
-import { CTASection } from "@/components/sections/cta";
 import { prisma } from "@/lib/db";
+import { SECTOR_IMAGES, SLUG_TO_ASSET_KEY } from "@/lib/sector-images";
 import { SECTORS } from "@/lib/constants";
+import dynamic from "next/dynamic";
 
-export const dynamic = 'force-dynamic';
+const WhyChooseUs = dynamic(() => import("@/components/sections/why-choose-us").then(mod => mod.WhyChooseUs));
+const GlobalPresence = dynamic(() => import("@/components/sections/global-presence").then(mod => mod.GlobalPresence));
+const CTASection = dynamic(() => import("@/components/sections/cta").then(mod => mod.CTASection));
+
+export const revalidate = 3600; // Revalidate every hour
 
 export default async function Home() {
     // Fallback data for Vercel (where prisma is null)
@@ -24,19 +27,42 @@ export default async function Home() {
     if (prisma) {
         try {
             // Fetch data in parallel to avoid waterfalls
-            const [dbSectors, dbHero] = await Promise.all([
+            const [dbSectors, dbHero, sectorAssets] = await Promise.all([
                 prisma.sector.findMany({
                     orderBy: { title: 'asc' },
                     take: 8
                 }),
                 prisma.siteAsset.findUnique({
                     where: { key: "HOME_HERO_BG" }
+                }),
+                prisma.siteAsset.findMany({
+                    where: {
+                        key: {
+                            in: Object.values(SLUG_TO_ASSET_KEY)
+                        }
+                    }
                 })
             ]);
 
             // Only override if DB returns data
             if (dbSectors && dbSectors.length > 0) {
-                sectors = dbSectors;
+                // Map sectors to include resolved hero images matching Detail Page logic
+                sectors = dbSectors.map(sector => {
+                    const assetKey = SLUG_TO_ASSET_KEY[sector.slug];
+                    const asset = sectorAssets.find(a => a.key === assetKey);
+
+                    // Fix: Ignore legacy seed paths that don't exist
+                    const isLegacyBrokenPath = sector.heroImage?.startsWith("/images/sectors/");
+                    const validHeroImage = isLegacyBrokenPath ? null : sector.heroImage;
+
+                    // Priority: 1. SiteAsset (Unified), 2. Sector Model (Legacy), 3. Static Config
+                    const resolvedImage = asset?.url || validHeroImage || SECTOR_IMAGES[sector.slug];
+
+                    return {
+                        ...sector,
+                        heroImage: resolvedImage
+                    };
+                });
             }
             if (dbHero) {
                 heroAsset = dbHero;

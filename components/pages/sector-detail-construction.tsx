@@ -12,9 +12,10 @@ import React from "react";
 interface SectorDetailConstructionProps {
     sector: Sector;
     heroImage?: string;
+    images?: Record<string, string>;
 }
 
-export function SectorDetailConstruction({ sector, heroImage }: SectorDetailConstructionProps) {
+export function SectorDetailConstruction({ sector, heroImage, images }: SectorDetailConstructionProps) {
     // Parse Branding (Safe)
     const branding = React.useMemo(() => {
         try {
@@ -30,14 +31,14 @@ export function SectorDetailConstruction({ sector, heroImage }: SectorDetailCons
             <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0 select-none">
                     <DynamicImage
-                        src={heroImage || "/images/sector-feature-construction.png"}
-                        fallbackSrc="/images/sector-feature-construction.png"
+                        src={heroImage || "/images/eng-execute-site.png"}
+                        fallbackSrc="/images/eng-execute-site.png"
                         alt="Construction Hero"
                         fill
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-[#051120]/80" /> {/* Dark Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#051120]/80 via-[#051120]/40 to-transparent" /> {/* Lighter Gradient Overlay */}
                 </div>
 
                 <div className="container relative z-10 px-4">
@@ -74,7 +75,7 @@ export function SectorDetailConstruction({ sector, heroImage }: SectorDetailCons
                                     The engineering and construction sector demands accuracy, speed, and discipline at every stage. Projects succeed when the right specialists are in the right roles, delivering technical excellence and operational control from planning through completion.
                                 </p>
                                 <p className="text-lg text-gray-600 leading-relaxed mt-4">
-                                    Our recruitment solutions are designed to support Clients, Consultants, Developers and Contractors across the full project lifecycle, supplying professionals who meet the technical, regulatory, and commercial demands of today's built environment.
+                                    Our recruitment solutions are designed to support Clients, Consultants, Developers and Contractors across the full project lifecycle, supplying professionals who meet the technical, regulatory, and commercial demands of today&apos;s built environment.
                                 </p>
                             </div>
 
@@ -132,8 +133,8 @@ export function SectorDetailConstruction({ sector, heroImage }: SectorDetailCons
 
                             <div className="mt-12">
                                 <DynamicImage
-                                    src="/images/eng-execute-site.png"
-                                    fallbackSrc="/images/sector-feature-construction.png"
+                                    src={images?.["SECTOR_CONSTRUCTION_FEATURE_1"] || "/images/eng-execute-site.png"}
+                                    fallbackSrc="/images/eng-execute-site.png"
                                     alt="Construction Site"
                                     width={400}
                                     height={200}

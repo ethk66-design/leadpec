@@ -11,9 +11,10 @@ interface ImageUploadProps {
     onChange: (url: string) => void;
     label: string;
     description?: string;
+    disabled?: boolean;
 }
 
-export function ImageUpload({ value, onChange, label, description }: ImageUploadProps) {
+export function ImageUpload({ value, onChange, label, description, disabled }: ImageUploadProps) {
     const [mode, setMode] = useState<"url" | "upload">("url");
     const [isUploading, setIsUploading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -81,7 +82,8 @@ export function ImageUpload({ value, onChange, label, description }: ImageUpload
                     <button
                         type="button"
                         onClick={() => setMode("url")}
-                        className={`px-2 py-1 text-xs rounded ${mode === "url" ? "bg-slate-200 font-medium" : "hover:bg-slate-100"}`}
+                        disabled={disabled}
+                        className={`px-2 py-1 text-xs rounded ${mode === "url" ? "bg-slate-200 font-medium" : "hover:bg-slate-100"} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                         <LinkIcon className="w-3 h-3 inline mr-1" />
                         URL
@@ -89,7 +91,8 @@ export function ImageUpload({ value, onChange, label, description }: ImageUpload
                     <button
                         type="button"
                         onClick={() => setMode("upload")}
-                        className={`px-2 py-1 text-xs rounded ${mode === "upload" ? "bg-slate-200 font-medium" : "hover:bg-slate-100"}`}
+                        disabled={disabled}
+                        className={`px-2 py-1 text-xs rounded ${mode === "upload" ? "bg-slate-200 font-medium" : "hover:bg-slate-100"} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                         <Upload className="w-3 h-3 inline mr-1" />
                         Upload
@@ -113,6 +116,7 @@ export function ImageUpload({ value, onChange, label, description }: ImageUpload
                     onClick={() => fileInputRef.current?.click()}
                 >
                     <input
+                        aria-label="Upload file"
                         ref={fileInputRef}
                         type="file"
                         accept="image/jpeg,image/png,image/webp,image/gif"
