@@ -126,7 +126,7 @@ export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps)
                             <div className="absolute inset-0 bg-[#0A2540] rounded-sm transform translate-x-4 translate-y-4" />
                             <div className="relative h-full w-full bg-white rounded-sm overflow-hidden shadow-xl border border-gray-200">
                                 <DynamicImage
-                                    src={collabImg}
+                                    src={collabImg || "/images/office-collaboration.png"}
                                     fallbackSrc="/images/office-collaboration.png"
                                     alt="Leadpec Corporate Environment"
                                     fill
@@ -146,7 +146,7 @@ export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps)
                 {/* Background Pattern */}
                 <div className="absolute inset-0 z-0">
                     <DynamicImage
-                        src={visionBg}
+                        src={visionBg || "/images/vision-background.png"}
                         fallbackSrc="/images/vision-background.png"
                         alt="Vision Background"
                         fill
