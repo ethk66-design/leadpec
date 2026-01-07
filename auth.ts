@@ -10,7 +10,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     providers: [
         Credentials({
             async authorize(credentials) {
-                if (!prisma) return null; // DB not available on Vercel
+                if (!prisma) throw new Error("Database connection failed");
 
                 const parsedCredentials = z
                     .object({ email: z.string().email(), password: z.string().min(6) })
