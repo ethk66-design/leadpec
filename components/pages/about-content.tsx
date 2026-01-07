@@ -31,7 +31,7 @@ export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps)
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <DynamicImage
-                        src={heroBg}
+                        src={heroBg || "/images/about-hero-team.png"}
                         fallbackSrc="/images/about-hero-team.png"
                         alt="About Hero"
                         fill
