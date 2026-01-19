@@ -415,8 +415,8 @@ export const WHY_CHOOSE_US = [
 
 export const CONTACT_INFO = {
     offices: [
-        { city: "Kochi (HQ)", address: "5th Floor, Vallamattam Estate, M G Road, Ravipuram, Ernakulam, Kerala, India.", coordinates: [9.9658, 76.2965] },
-        { city: "New Delhi", address: "1417 Hemkunt Chambers, Nehru Place, New Delhi-19, India", coordinates: [28.5494, 77.2526] },
+        { city: "New Delhi (HQ)", address: "1417 Hemkunt Chambers, Nehru Place, New Delhi-19, India", coordinates: [28.5494, 77.2526] },
+        { city: "Kochi", address: "5th Floor, Vallamattam Estate, M G Road, Ravipuram, Ernakulam, Kerala, India.", coordinates: [9.9658, 76.2965] },
         { city: "Chandigarh", address: "Chandigarh, Haryana, Punjab.", coordinates: [30.7333, 76.7794] },
         { city: "London", address: "London, UK", coordinates: [51.5074, -0.1278] },
     ],

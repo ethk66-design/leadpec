@@ -309,7 +309,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailProps) 
                                         </Link>
 
                                         <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-xs text-gray-400">
-                                            <span>Global HQ: Kochi</span>
+                                            <span>Global HQ: New Delhi</span>
                                             <span>+91 123 456 7890</span>
                                         </div>
                                     </div>
