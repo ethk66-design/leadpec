@@ -45,7 +45,7 @@ export function SectorsContent({ sectors }: SectorsContentProps) {
             <section className="py-12 md:py-16 bg-white">
                 <div className="container px-4">
                     <div className="text-center mb-10 md:mb-16 max-w-3xl mx-auto">
-                        <h2 className="text-3xl md:text-4xl font-bold text-[#0B1B32] mb-4">Strategic Sector Focus</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-[#0B1B32] mb-4 font-heading">Strategic Sector Focus</h2>
                         <p className="text-gray-600">Delivering excellence in complex environments through three core operational pillars.</p>
                     </div>
 

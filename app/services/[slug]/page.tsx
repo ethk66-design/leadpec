@@ -307,11 +307,6 @@ export default async function ServiceDetailPage({ params }: ServiceDetailProps) 
                                             Intiate Engagement
                                             <ArrowLeft className="w-4 h-4 rotate-180 group-hover:translate-x-1 transition-transform" />
                                         </Link>
-
-                                        <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-xs text-gray-400">
-                                            <span>Global HQ: New Delhi</span>
-                                            <span>+91 123 456 7890</span>
-                                        </div>
                                     </div>
                                 </div>
 

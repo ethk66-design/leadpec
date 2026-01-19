@@ -144,7 +144,7 @@ export function CareersContent({ jobs, heroBg, officeImg, cultureImg, growthImg,
                     />
                 </div>
                 <div className="container relative z-10 px-4 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-12">Global Deployment Impact</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-12 font-heading">Global Deployment Impact</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         <div>
                             <div className="text-4xl md:text-5xl font-bold text-[#0ea5e9] mb-2">15+</div>
