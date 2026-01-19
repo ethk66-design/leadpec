@@ -45,7 +45,7 @@ export function HeroSection({ heroImage }: HeroSectionProps) {
                         />
                         <div className="flex flex-col items-start text-left">
                             <span className="text-[#D4AF37] font-bold text-[10px] sm:text-xs uppercase tracking-wider">
-                                Govt. of India Approved Agency
+                                Govt. of India Approved Recruitment Agency
                             </span>
                             <span className="text-gray-400 text-[9px] sm:text-[10px]">
                                 Reg: B-1698/DEL/COM/1000+/5/10340/2023
