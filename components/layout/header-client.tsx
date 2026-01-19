@@ -47,6 +47,17 @@ export function HeaderClient({ sectors }: HeaderClientProps) {
             <div className="bg-[#051120] text-gray-400 text-xs py-2 border-b border-white/5 hidden lg:block relative z-[60]">
                 <div className="container flex justify-between items-center">
                     <div className="flex items-center gap-6">
+                        {/* Govt Approval Badge */}
+                        <div className="flex items-center gap-2 text-[#D4AF37] border-r border-white/10 pr-6" title="Reg: B-1698/DEL/COM/1000+/5/10340/2023">
+                            <Image
+                                src="/images/govt-india-emblem.png"
+                                alt="Govt of India"
+                                width={16}
+                                height={20}
+                                className="invert opacity-80"
+                            />
+                            <span className="font-medium">Govt. of India Approved</span>
+                        </div>
                         <a href={`mailto:${CONTACT_INFO.email}`} className="flex items-center gap-2 hover:text-white transition-colors">
                             <Mail className="w-3.5 h-3.5 text-[#008CBA]" />
                             <span>{CONTACT_INFO.email}</span>
