@@ -118,7 +118,7 @@ export function WhyChooseUs() {
                     </div>
 
                     {/* Right Column: Image */}
-                    <div className="lg:w-2/5">
+                    <div className="w-full lg:w-2/5">
                         <div className="relative h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
                             <Image
                                 src={sideImage}
