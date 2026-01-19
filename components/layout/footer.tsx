@@ -88,8 +88,14 @@ export async function Footer() {
 
                         <div className="pt-6 border-t border-white/5 mt-6">
                             <p className="text-white font-bold text-xs md:text-sm">{CONTACT_INFO.legal.name}</p>
-                            <div className="flex items-start gap-2 mt-2">
-                                <ShieldCheck className="w-5 h-5 text-blue-200/50 mt-0.5" />
+                            <div className="flex items-start gap-3 mt-2">
+                                <Image
+                                    src="/images/govt-india-emblem.png"
+                                    alt="Government of India Emblem"
+                                    width={32}
+                                    height={40}
+                                    className="invert opacity-60"
+                                />
                                 <p className="text-[10px] md:text-xs text-blue-200/50 leading-tight max-w-[200px]">
                                     {CONTACT_INFO.legal.registration}
                                 </p>
