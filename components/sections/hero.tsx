@@ -34,6 +34,25 @@ export function HeroSection({ heroImage }: HeroSectionProps) {
                     transition={{ duration: 0.8 }}
                     className="max-w-4xl mx-auto"
                 >
+                    {/* Govt of India Approval Badge */}
+                    <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 mb-6">
+                        <img
+                            src="/images/govt-india-emblem.png"
+                            alt="Govt of India"
+                            width={20}
+                            height={24}
+                            className="invert opacity-90"
+                        />
+                        <div className="flex flex-col items-start text-left">
+                            <span className="text-[#D4AF37] font-bold text-[10px] sm:text-xs uppercase tracking-wider">
+                                Govt. of India Approved Agency
+                            </span>
+                            <span className="text-gray-400 text-[9px] sm:text-[10px]">
+                                Reg: B-1698/DEL/COM/1000+/5/10340/2023
+                            </span>
+                        </div>
+                    </div>
+
                     <h2 className="text-[#008CBA] font-bold tracking-wide md:tracking-[0.2em] mb-4 md:mb-6 uppercase text-[10px] sm:text-xs md:text-base">
                         Global Recruitment & Executive Search
                     </h2>
