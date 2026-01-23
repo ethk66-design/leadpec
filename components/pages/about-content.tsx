@@ -38,8 +38,8 @@ export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps)
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-[#051120]/80 mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#051120] via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-[#051120]/40 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#051120] via-[#051120]/30 to-transparent" />
                 </div>
 
                 <div className="container relative z-10 px-4 text-center">
