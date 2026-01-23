@@ -176,7 +176,6 @@ export function AboutContent({ heroBg, collabImg, visionBg, missionCardBg, visio
                             </div>
 
                             <div className="relative z-10">
-                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#008CBA] to-transparent transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
 
                                 <div className="w-16 h-16 bg-[#008CBA]/10 rounded-full flex items-center justify-center mb-8 border border-[#008CBA]/20 group-hover:bg-[#008CBA] transition-colors duration-300">
                                     <Target className="w-8 h-8 text-[#008CBA] group-hover:text-white" />
@@ -210,7 +209,6 @@ export function AboutContent({ heroBg, collabImg, visionBg, missionCardBg, visio
                             </div>
 
                             <div className="relative z-10">
-                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#4DB6AC] to-transparent transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
 
                                 <div className="w-16 h-16 bg-[#4DB6AC]/10 rounded-full flex items-center justify-center mb-8 border border-[#4DB6AC]/20 group-hover:bg-[#4DB6AC] transition-colors duration-300">
                                     <Lightbulb className="w-8 h-8 text-[#4DB6AC] group-hover:text-[#051120]" />

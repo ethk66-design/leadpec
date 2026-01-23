@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Upload, Link as LinkIcon, X, Loader2 } from "lucide-react";
 import Image from "next/image";
+import imageCompression from "browser-image-compression";
 
 interface ImageUploadProps {
     value: string;
@@ -17,16 +18,38 @@ interface ImageUploadProps {
 export function ImageUpload({ value, onChange, label, description, disabled }: ImageUploadProps) {
     const [mode, setMode] = useState<"url" | "upload">("url");
     const [isUploading, setIsUploading] = useState(false);
+    const [uploadStatus, setUploadStatus] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     async function handleFileUpload(file: File) {
         setError(null);
         setIsUploading(true);
+        setUploadStatus("Compressing image...");
 
         try {
+            // Compress the image before uploading
+            const options = {
+                maxSizeMB: 0.5, // Max 500KB
+                maxWidthOrHeight: 1920, // Max dimension
+                useWebWorker: true,
+                fileType: "image/webp" as const, // Convert to WebP for best compression
+            };
+
+            let compressedFile: File;
+
+            // Only compress if file is larger than 500KB
+            if (file.size > 500 * 1024) {
+                compressedFile = await imageCompression(file, options);
+                console.log(`Compressed: ${(file.size / 1024).toFixed(0)}KB → ${(compressedFile.size / 1024).toFixed(0)}KB`);
+            } else {
+                compressedFile = file;
+            }
+
+            setUploadStatus("Uploading...");
+
             const formData = new FormData();
-            formData.append("file", file);
+            formData.append("file", compressedFile);
 
             const response = await fetch("/api/upload", {
                 method: "POST",
@@ -42,9 +65,11 @@ export function ImageUpload({ value, onChange, label, description, disabled }: I
 
             onChange(result.url);
         } catch (err) {
+            console.error("Upload error:", err);
             setError("Upload failed. Please try again.");
         } finally {
             setIsUploading(false);
+            setUploadStatus("");
         }
     }
 
@@ -126,7 +151,7 @@ export function ImageUpload({ value, onChange, label, description, disabled }: I
                     {isUploading ? (
                         <div className="flex flex-col items-center gap-2">
                             <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-                            <span className="text-sm text-muted-foreground">Uploading...</span>
+                            <span className="text-sm text-muted-foreground">{uploadStatus || "Processing..."}</span>
                         </div>
                     ) : (
                         <div className="flex flex-col items-center gap-2">
