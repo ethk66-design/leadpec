@@ -22,9 +22,11 @@ interface AboutContentProps {
     heroBg?: string;
     collabImg?: string;
     visionBg?: string;
+    missionCardBg?: string;
+    visionCardBg?: string;
 }
 
-export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps) {
+export function AboutContent({ heroBg, collabImg, visionBg, missionCardBg, visionCardBg }: AboutContentProps) {
     return (
         <main className="flex-1 bg-white">
             {/* 1. Hero Section (Industrial Dark) */}
@@ -38,8 +40,7 @@ export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps)
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-[#051120]/40 mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#051120] via-[#051120]/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#051120]/90" />
                 </div>
 
                 <div className="container relative z-10 px-4 text-center">
@@ -70,14 +71,14 @@ export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps)
             </section>
 
             {/* 2. Introduction - Matching AboutBrief (Light/Clean) */}
-            <section className="py-16 md:py-24 bg-gray-50">
+            <section className="py-10 md:py-14 bg-[#F8F6F3]">
                 <div className="container px-4">
-                    <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
+                    <div className="grid lg:grid-cols-2 gap-10 md:gap-12 items-center">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="space-y-8"
+                            className="space-y-6"
                         >
                             <div>
                                 <h2 className="text-sm font-bold text-[#D4AF37] uppercase tracking-widest mb-3">Who We Are</h2>
@@ -88,22 +89,16 @@ export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps)
 
                             <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                                 <p>
-                                    LEADPEC is a global leader in Recruitment, Talent Sourcing and Executive Search, providing comprehensive manpower solutions including permanent, temporary, short-term, secondment, and remote hiring. With operations spanning the GCC, Europe, North America, Asia, Oceania, and Africa, we are the preferred recruitment partner for a wide range of prestigious clients in both the public and private sectors.
+                                    <strong>LEADPEC</strong> is a global leader in Recruitment, Talent Sourcing and Executive Search. We provide comprehensive manpower solutions — permanent, temporary, secondment, and remote hiring — across the GCC, Europe, North America, Asia, Oceania, and Africa.
                                 </p>
                                 <p>
-                                    We have established ourselves as a trusted Talent Acquisition partner, delivering customized solutions that align with each client’s strategic objectives. Our expertise covers diverse industries, enabling us to identify, attract, and retain premium talent that drives organizational performance. Through our Executive Search services, we connect clients with senior-level professionals who bring the leadership, experience, and vision necessary to achieve sustainable growth.
+                                    As a trusted Talent Acquisition partner, we deliver customized recruitment solutions aligned with each client&apos;s strategic objectives. Our Executive Search services connect organizations with senior-level professionals who drive sustainable growth.
                                 </p>
                                 <p>
-                                    At LEADPEC, we combine global insight with local expertise. Our team of seasoned professionals possesses an in-depth understanding of evolving market dynamics, ensuring our clients benefit from agile, informed, and effective recruitment strategies. Supported by a strong international network, strategic regional alliances, and partnerships with leading job portals, we provide value-driven recruitment services that consistently meet and exceed expectations.
+                                    We combine <strong>global insight with local expertise</strong>, backed by a strong international network and partnerships with leading job portals. Our state-of-the-art systems ensure efficiency and precision, even in high-volume scenarios.
                                 </p>
                                 <p>
-                                    Our success is rooted in quality, innovation, and commitment. We employ state-of-the-art systems, rigorous processes, and integrated technologies to ensure efficiency and precision — even in high-volume recruitment scenarios. This dedication to excellence has earned LEADPEC a solid reputation for reliability and timely delivery across all engagements.
-                                </p>
-                                <p>
-                                    We take pride in building long-term relationships with clients and candidates alike, fostering mutual trust and success. By understanding your organizational goals, culture, and values, we deliver talent that not only meets your technical requirements but also integrates seamlessly into your team.
-                                </p>
-                                <p>
-                                    At LEADPEC, our mission is clear — to empower organizations through exceptional talent. By partnering with us, you gain access to global reach, industry expertise, and a steadfast commitment to quality that transforms your talent acquisition process and strengthens your competitive edge.
+                                    At LEADPEC, our mission is clear — <strong>to empower organizations through exceptional talent</strong>. Partner with us for global reach, industry expertise, and a commitment to quality that transforms your talent acquisition process.
                                 </p>
                             </div>
 
@@ -142,7 +137,7 @@ export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps)
             <TrustIndicators />
 
             {/* 4. Mission & Vision - Matching ProcessFlow (Dark Blue) */}
-            <section className="py-16 md:py-24 bg-[#0A2540] relative overflow-hidden">
+            <section className="py-12 md:py-16 bg-[#0A2540] relative overflow-hidden">
                 {/* Background Pattern */}
                 <div className="absolute inset-0 z-0">
                     <DynamicImage
@@ -155,7 +150,7 @@ export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps)
                 </div>
 
                 <div className="container relative z-10 px-4">
-                    <div className="text-center mb-16 max-w-3xl mx-auto">
+                    <div className="text-center mb-10 max-w-3xl mx-auto">
                         <h2 className="text-sm font-bold text-[#4DB6AC] uppercase tracking-widest mb-3">Our Purpose</h2>
                         <h3 className="text-3xl md:text-5xl font-bold text-white font-heading">Driving Industrial Growth</h3>
                     </div>
@@ -166,18 +161,32 @@ export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps)
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="group relative bg-[#051120]/50 backdrop-blur-sm p-8 md:p-12 border border-[#008CBA]/30 hover:border-[#008CBA] transition-all duration-300"
+                            className="group relative overflow-hidden p-8 md:p-12 border border-[#008CBA]/30 hover:border-[#008CBA] transition-all duration-300"
                         >
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#008CBA] to-transparent transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-
-                            <div className="w-16 h-16 bg-[#008CBA]/10 rounded-full flex items-center justify-center mb-8 border border-[#008CBA]/20 group-hover:bg-[#008CBA] transition-colors duration-300">
-                                <Target className="w-8 h-8 text-[#008CBA] group-hover:text-white" />
+                            {/* Background Image */}
+                            <div className="absolute inset-0 z-0">
+                                <DynamicImage
+                                    src={missionCardBg || "/images/mission-card-bg.jpg"}
+                                    fallbackSrc="/images/about-hero-team.png"
+                                    alt=""
+                                    fill
+                                    className="object-cover"
+                                />
+                                <div className="absolute inset-0 bg-[#051120]/70" />
                             </div>
 
-                            <h3 className="text-3xl font-bold text-white mb-6 font-heading">Our Mission</h3>
-                            <p className="text-gray-300 leading-relaxed text-lg border-l-2 border-[#008CBA]/30 pl-4 group-hover:border-[#008CBA] transition-colors">
-                                {COMPANY_INFO.mission}
-                            </p>
+                            <div className="relative z-10">
+                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#008CBA] to-transparent transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+
+                                <div className="w-16 h-16 bg-[#008CBA]/10 rounded-full flex items-center justify-center mb-8 border border-[#008CBA]/20 group-hover:bg-[#008CBA] transition-colors duration-300">
+                                    <Target className="w-8 h-8 text-[#008CBA] group-hover:text-white" />
+                                </div>
+
+                                <h3 className="text-3xl font-bold text-white mb-6 font-heading">Our Mission</h3>
+                                <p className="text-gray-300 leading-relaxed text-lg border-l-2 border-[#008CBA]/30 pl-4 group-hover:border-[#008CBA] transition-colors">
+                                    {COMPANY_INFO.mission}
+                                </p>
+                            </div>
                         </motion.div>
 
                         {/* Vision Card */}
@@ -186,27 +195,41 @@ export function AboutContent({ heroBg, collabImg, visionBg }: AboutContentProps)
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="group relative bg-[#051120]/50 backdrop-blur-sm p-8 md:p-12 border border-[#4DB6AC]/30 hover:border-[#4DB6AC] transition-all duration-300"
+                            className="group relative overflow-hidden p-8 md:p-12 border border-[#4DB6AC]/30 hover:border-[#4DB6AC] transition-all duration-300"
                         >
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#4DB6AC] to-transparent transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-
-                            <div className="w-16 h-16 bg-[#4DB6AC]/10 rounded-full flex items-center justify-center mb-8 border border-[#4DB6AC]/20 group-hover:bg-[#4DB6AC] transition-colors duration-300">
-                                <Lightbulb className="w-8 h-8 text-[#4DB6AC] group-hover:text-[#051120]" />
+                            {/* Background Image */}
+                            <div className="absolute inset-0 z-0">
+                                <DynamicImage
+                                    src={visionCardBg || "/images/vision-card-bg.jpg"}
+                                    fallbackSrc="/images/about-hero-team.png"
+                                    alt=""
+                                    fill
+                                    className="object-cover"
+                                />
+                                <div className="absolute inset-0 bg-[#051120]/70" />
                             </div>
 
-                            <h3 className="text-3xl font-bold text-white mb-6 font-heading">Our Vision</h3>
-                            <p className="text-gray-300 leading-relaxed text-lg border-l-2 border-[#4DB6AC]/30 pl-4 group-hover:border-[#4DB6AC] transition-colors">
-                                {COMPANY_INFO.vision}
-                            </p>
+                            <div className="relative z-10">
+                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#4DB6AC] to-transparent transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+
+                                <div className="w-16 h-16 bg-[#4DB6AC]/10 rounded-full flex items-center justify-center mb-8 border border-[#4DB6AC]/20 group-hover:bg-[#4DB6AC] transition-colors duration-300">
+                                    <Lightbulb className="w-8 h-8 text-[#4DB6AC] group-hover:text-[#051120]" />
+                                </div>
+
+                                <h3 className="text-3xl font-bold text-white mb-6 font-heading">Our Vision</h3>
+                                <p className="text-gray-300 leading-relaxed text-lg border-l-2 border-[#4DB6AC]/30 pl-4 group-hover:border-[#4DB6AC] transition-colors">
+                                    {COMPANY_INFO.vision}
+                                </p>
+                            </div>
                         </motion.div>
                     </div>
                 </div>
             </section>
 
             {/* 5. Core Values - Matching WhyChooseUs (Dark/Industrial) */}
-            <section className="py-16 md:py-24 bg-[#202020]">
+            <section className="py-12 md:py-16 bg-[#202020]">
                 <div className="container px-4">
-                    <div className="mb-16 md:text-center">
+                    <div className="mb-10 md:text-center">
                         <h2 className="text-sm font-bold text-[#D4AF37] uppercase tracking-widest mb-3">Corporate Values</h2>
                         <h3 className="text-3xl md:text-5xl font-bold text-white font-heading">The Principles We Live By</h3>
                     </div>

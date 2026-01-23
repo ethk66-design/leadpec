@@ -11,7 +11,7 @@ export default async function AboutPage() {
         assets = await prisma.siteAsset.findMany({
             where: {
                 key: {
-                    in: ["ABOUT_HERO_BG", "ABOUT_COLLAB_IMG", "ABOUT_VISION_BG"]
+                    in: ["ABOUT_HERO_BG", "ABOUT_COLLAB_IMG", "ABOUT_VISION_BG", "ABOUT_MISSION_CARD_BG", "ABOUT_VISION_CARD_BG"]
                 }
             }
         });
@@ -29,6 +29,8 @@ export default async function AboutPage() {
                 heroBg={assetMap["ABOUT_HERO_BG"]}
                 collabImg={assetMap["ABOUT_COLLAB_IMG"]}
                 visionBg={assetMap["ABOUT_VISION_BG"]}
+                missionCardBg={assetMap["ABOUT_MISSION_CARD_BG"]}
+                visionCardBg={assetMap["ABOUT_VISION_CARD_BG"]}
             />
             <Footer />
         </div>

@@ -62,6 +62,18 @@ const ABOUT_SECTION: ContentSection = {
             label: "Vision Section Background",
             description: "Background pattern for the Mission & Vision section.",
             defaultSrc: "/images/vision-background.png"
+        },
+        {
+            key: "ABOUT_MISSION_CARD_BG",
+            label: "Mission Card Background",
+            description: "Background image for Mission card on About page.",
+            defaultSrc: "/images/mission-card-bg.jpg"
+        },
+        {
+            key: "ABOUT_VISION_CARD_BG",
+            label: "Vision Card Background",
+            description: "Background image for Vision card on About page.",
+            defaultSrc: "/images/vision-card-bg.jpg"
         }
     ]
 };
