@@ -73,11 +73,11 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
     // Parse Process Flow (Safe)
     const processFlow: ProcessStep[] = React.useMemo(() => {
         try {
-            return sector.processFlow ? JSON.parse(sector.processFlow) : [];
+            return sector.process ? JSON.parse(sector.process) : [];
         } catch (e) {
             return [];
         }
-    }, [sector.processFlow]);
+    }, [sector.process]);
 
     // Get slug for image keys
     const slug = sector.slug.toUpperCase().replace(/-/g, '_');
