@@ -20,7 +20,8 @@ import {
     Hammer,
     Truck,
     ArrowLeft,
-    Tractor
+    Tractor,
+    ArrowRight
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -52,6 +53,11 @@ interface SectorDetailProps {
     images?: Record<string, string>;
 }
 
+interface ProcessStep {
+    title: string;
+    description: string;
+}
+
 export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
     const IconComponent = iconMap[sector.iconName || "Briefcase"] || Briefcase;
 
@@ -63,6 +69,22 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
             return null;
         }
     }, [sector.branding]);
+
+    // Parse Process Flow (Safe)
+    const processFlow: ProcessStep[] = React.useMemo(() => {
+        try {
+            return sector.processFlow ? JSON.parse(sector.processFlow) : [];
+        } catch (e) {
+            return [];
+        }
+    }, [sector.processFlow]);
+
+    // Get slug for image keys
+    const slug = sector.slug.toUpperCase().replace(/-/g, '_');
+    const middleImageKey = `SECTOR_${slug}_MIDDLE`;
+    const bottomImageKey = `SECTOR_${slug}_BOTTOM`;
+    const middleImage = images?.[middleImageKey];
+    const bottomImage = images?.[bottomImageKey];
 
     return (
         <div className="flex-1">
@@ -92,8 +114,8 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <Link href="/services" className="inline-flex items-center text-[#008CBA] hover:text-[#4DB6AC] mb-6 transition-colors font-semibold">
-                            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Services
+                        <Link href="/sectors" className="inline-flex items-center text-[#008CBA] hover:text-[#4DB6AC] mb-6 transition-colors font-semibold">
+                            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Sectors
                         </Link>
 
                         <div className="flex items-center gap-6 mb-6">
@@ -146,7 +168,7 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
                             </motion.div>
                         </div>
 
-                        {/* Right Column: Sidebar / Key Features or Stats could go here later */}
+                        {/* Right Column: Sidebar */}
                         <div className="lg:col-span-1">
                             <div className="bg-[#F8FAFC] p-8 rounded-xl border border-gray-100 sticky top-24">
                                 <h4 className="text-lg font-bold text-[#0B1B32] mb-4">Why Partner With Us?</h4>
@@ -173,6 +195,117 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            {/* Middle Feature Section with Image */}
+            {middleImage && (
+                <section className="py-16 bg-slate-50">
+                    <div className="container px-4">
+                        <div className="grid md:grid-cols-2 gap-12 items-center">
+                            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
+                                <Image
+                                    src={middleImage}
+                                    alt={`${sector.title} Feature`}
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+                            <div>
+                                <h3 className="text-3xl font-bold text-[#0B1B32] mb-6">
+                                    {branding?.processTitle || "Our Approach"}
+                                </h3>
+                                <p className="text-gray-600 text-lg leading-relaxed">
+                                    We deliver specialized talent solutions for the {sector.title.toLowerCase()} sector,
+                                    ensuring your projects are staffed with qualified professionals who meet the highest
+                                    industry standards. Our rigorous vetting process guarantees candidates with the right
+                                    skills, certifications, and experience.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {/* Process Flow Section */}
+            {processFlow.length > 0 && (
+                <section className="py-16 bg-white">
+                    <div className="container px-4">
+                        <h2 className="text-3xl font-bold text-[#0B1B32] text-center mb-12">
+                            {branding?.processTitle || "Our Process"}
+                        </h2>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            {processFlow.map((step, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="relative"
+                                >
+                                    <div className="bg-slate-50 p-6 rounded-xl border border-slate-100 h-full">
+                                        <div className="w-10 h-10 bg-[#008CBA] text-white rounded-full flex items-center justify-center font-bold mb-4">
+                                            {index + 1}
+                                        </div>
+                                        <h4 className="text-lg font-bold text-[#0B1B32] mb-2">{step.title}</h4>
+                                        <p className="text-gray-600 text-sm">{step.description}</p>
+                                    </div>
+                                    {index < processFlow.length - 1 && (
+                                        <div className="hidden lg:block absolute top-10 -right-4 z-10">
+                                            <ArrowRight className="w-6 h-6 text-[#008CBA]" />
+                                        </div>
+                                    )}
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {/* Bottom CTA Section */}
+            <section className="relative py-20 bg-[#0B1B32] overflow-hidden">
+                {bottomImage && (
+                    <div className="absolute inset-0 z-0">
+                        <Image
+                            src={bottomImage}
+                            alt="CTA Background"
+                            fill
+                            className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-[#0B1B32]/80" />
+                    </div>
+                )}
+                {!bottomImage && (
+                    <div className="absolute inset-0 opacity-10 bg-[image:radial-gradient(#4DB6AC_1px,transparent_1px)] bg-[size:30px_30px]"></div>
+                )}
+                <div className="container relative z-10 px-4 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                            Ready to Start Your Project?
+                        </h2>
+                        <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
+                            Partner with LEADPEC for reliable, skilled manpower solutions tailored to your {sector.title.toLowerCase()} requirements.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Link
+                                href="/contact"
+                                className="px-8 py-4 bg-[#008CBA] hover:bg-[#0077a3] text-white font-bold rounded-sm transition-colors"
+                            >
+                                Contact Us Today
+                            </Link>
+                            <Link
+                                href="/sectors"
+                                className="px-8 py-4 border-2 border-white/30 hover:border-white text-white font-bold rounded-sm transition-colors"
+                            >
+                                Explore Other Sectors
+                            </Link>
+                        </div>
+                    </motion.div>
                 </div>
             </section>
         </div>
