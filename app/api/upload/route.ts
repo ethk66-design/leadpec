@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
+import { put } from "@vercel/blob";
 
 export async function POST(request: NextRequest) {
     try {
@@ -24,27 +23,18 @@ export async function POST(request: NextRequest) {
         }
 
         // Create unique filename
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-
         const timestamp = Date.now();
         const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
-        const filename = `${timestamp}-${originalName}`;
+        const filename = `uploads/${timestamp}-${originalName}`;
 
-        // Ensure uploads directory exists
-        const uploadsDir = path.join(process.cwd(), "public", "uploads");
-        await mkdir(uploadsDir, { recursive: true });
+        // Upload to Vercel Blob
+        const blob = await put(filename, file, {
+            access: "public",
+        });
 
-        // Write file
-        const filepath = path.join(uploadsDir, filename);
-        await writeFile(filepath, buffer);
-
-        // Return the public URL
-        const url = `/uploads/${filename}`;
-
-        return NextResponse.json({ url, success: true });
+        return NextResponse.json({ url: blob.url, success: true });
     } catch (error) {
         console.error("Upload error:", error);
-        return NextResponse.json({ error: "Upload failed" }, { status: 500 });
+        return NextResponse.json({ error: "Upload failed. Check BLOB_READ_WRITE_TOKEN in environment." }, { status: 500 });
     }
 }

@@ -1,33 +1,30 @@
-
 import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
+import { hash } from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-async function main() {
-    const email = 'admin@example.com';
-    const password = 'adminpassword';
-    const hashedPassword = await bcrypt.hash(password, 10);
+async function resetAdmin() {
+    console.log('🔑 Resetting admin password...');
 
-    const user = await prisma.user.upsert({
-        where: { email },
-        update: { password: hashedPassword },
+    const newPassword = await hash('SecurePass123!', 12);
+
+    const admin = await prisma.user.upsert({
+        where: { email: 'admin@leedpec.com' },
+        update: {
+            password: newPassword  // Force update password
+        },
         create: {
-            email,
-            name: 'Admin User',
-            password: hashedPassword,
+            email: 'admin@leedpec.com',
+            name: 'Super Admin',
+            password: newPassword,
         },
     });
 
-    console.log(`Admin user upserted: ${user.email}`);
-    console.log(`Password set to: ${password}`);
+    console.log(`✅ Admin password reset for: ${admin.email}`);
+    console.log('📧 Email: admin@leedpec.com');
+    console.log('🔐 Password: SecurePass123!');
 }
 
-main()
-    .catch((e) => {
-        console.error(e);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
-    });
+resetAdmin()
+    .catch(console.error)
+    .finally(() => prisma.$disconnect());
