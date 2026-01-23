@@ -250,36 +250,10 @@ export const STATS = [
 
 export const SERVICES = [
     {
-        title: "Executive Search",
-        slug: "executive-search",
-        description: "Connect organizations with visionary Leaders Who Drive Success",
-        content: "Leadpec’s Executive Search services connect you with proven, visionary leaders who bring strategic insight, industry expertise, and the passion to drive innovation and growth. We deliver tailored, discreet searches designed to align with your long-term vision, ensuring that every executive we identify is the right fit for your organization’s goals and culture. With a commitment to excellence, confidentiality, and a deep understanding of your unique needs, we help you secure the leadership talent that will shape your organization’s future. Partner with us to elevate your leadership and drive lasting success.",
-        features: ["Confidential Search", "Leadership Competency Framework", "C-Level Network Access", "Strategic Succession Planning"],
-        icon: "Search",
-        images: [
-            "/images/service-exec-decision.png",
-            "/images/service-exec-global.png",
-            "/images/service-exec-handshake.png"
-        ],
-        branding: {
-            heroTitle: "Leadership That Defines The Future.",
-            heroSubtitle: "Securing the Visionaries.",
-            quote: "An organization can only grow as fast as its leadership allows. We find the catalysts for that growth.",
-            conceptTitle: "The Executive Ecosystem",
-            processTitle: "The Search Methodology"
-        },
-        process: [
-            { title: "Market Mapping", description: "Extensive industry analysis to identify hidden talent pools and leadership benchmarks." },
-            { title: "Discreet Outreach", description: "Confidential engagement with passive candidates through trusted intermediaries." },
-            { title: "Competency & Vision", description: "Validating not just skills, but the ability to drive your specific strategic goals." },
-            { title: "Strategic Appointment", description: "Facilitating negotiation, onboarding, and long-term leadership integration." }
-        ]
-    },
-    {
         title: "Permanent Hire",
         slug: "permanent-hire",
         description: "Building your organization for the long term",
-        content: "LEADPEC’s Permanent Direct Hire services help you attract high-performing professionals with the right expertise and cultural fit. We partner closely with your team to understand your long-term goals and source candidates who align with your technical requirements and company values. With our global reach and sector-specific expertise in energy, infrastructure, and natural resources, we identify and engage top-tier professionals—from executive leadership to hard-to-find specialists—ensuring a seamless hiring process that strengthens your workforce for sustained success.",
+        content: "LEADPEC's Permanent Direct Hire services help you attract high-performing professionals with the right expertise and cultural fit. We partner closely with your team to understand your long-term goals and source candidates who align with your technical requirements and company values. With our global reach and sector-specific expertise in energy, infrastructure, and natural resources, we identify and engage top-tier professionals—from executive leadership to hard-to-find specialists—ensuring a seamless hiring process that strengthens your workforce for sustained success.",
         features: ["Culture Fit Assessment", "Long-term Retention Strategy", "Global Talent Pools", "Detailed Candidate Profiling"],
         icon: "Users",
         images: [
@@ -351,6 +325,32 @@ export const SERVICES = [
             { title: "Safety & Competency", description: "Deploying pre-certified teams trained in confined space and hazardous environments." },
             { title: "24/7 Operations", description: "Shift management to ensuring continuous coverage during critical windows." },
             { title: "Demobilization", description: "Efficient ramp-down and structured handover post-turnaround." }
+        ]
+    },
+    {
+        title: "Executive Search",
+        slug: "executive-search",
+        description: "Connect organizations with visionary Leaders Who Drive Success",
+        content: "Leadpec's Executive Search services connect you with proven, visionary leaders who bring strategic insight, industry expertise, and the passion to drive innovation and growth. We deliver tailored, discreet searches designed to align with your long-term vision, ensuring that every executive we identify is the right fit for your organization's goals and culture. With a commitment to excellence, confidentiality, and a deep understanding of your unique needs, we help you secure the leadership talent that will shape your organization's future. Partner with us to elevate your leadership and drive lasting success.",
+        features: ["Confidential Search", "Leadership Competency Framework", "C-Level Network Access", "Strategic Succession Planning"],
+        icon: "Search",
+        images: [
+            "/images/service-exec-decision.png",
+            "/images/service-exec-global.png",
+            "/images/service-exec-handshake.png"
+        ],
+        branding: {
+            heroTitle: "Leadership That Defines The Future.",
+            heroSubtitle: "Securing the Visionaries.",
+            quote: "An organization can only grow as fast as its leadership allows. We find the catalysts for that growth.",
+            conceptTitle: "The Executive Ecosystem",
+            processTitle: "The Search Methodology"
+        },
+        process: [
+            { title: "Market Mapping", description: "Extensive industry analysis to identify hidden talent pools and leadership benchmarks." },
+            { title: "Discreet Outreach", description: "Confidential engagement with passive candidates through trusted intermediaries." },
+            { title: "Competency & Vision", description: "Validating not just skills, but the ability to drive your specific strategic goals." },
+            { title: "Strategic Appointment", description: "Facilitating negotiation, onboarding, and long-term leadership integration." }
         ]
     }
 ];
