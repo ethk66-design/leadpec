@@ -114,16 +114,17 @@ export default async function SectorPage({ params }: SectorPageProps) {
     // 3. Select Component
     const DetailComponent = SECTOR_COMPONENTS[params.slug];
 
+    // If no custom component exists, use the generic SectorDetail component
     if (!DetailComponent) {
+        // Dynamic import to avoid circular dependencies
+        const { SectorDetail } = await import("@/components/sectors/sector-detail");
+
         return (
-            <main className="min-h-screen bg-slate-50">
+            <div className="flex flex-col min-h-screen">
                 <Header />
-                <div className="container py-20">
-                    <h1 className="text-3xl font-bold">Sector content coming soon...</h1>
-                    <p>{sector.title}</p>
-                </div>
+                <SectorDetail sector={sector} />
                 <Footer />
-            </main>
+            </div>
         );
     }
 
