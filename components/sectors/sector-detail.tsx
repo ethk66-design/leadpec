@@ -23,6 +23,7 @@ import {
     Tractor
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 
 const iconMap: { [key: string]: React.ElementType } = {
@@ -47,9 +48,11 @@ const iconMap: { [key: string]: React.ElementType } = {
 
 interface SectorDetailProps {
     sector: Sector;
+    heroImage?: string;
+    images?: Record<string, string>;
 }
 
-export function SectorDetail({ sector }: SectorDetailProps) {
+export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
     const IconComponent = iconMap[sector.iconName || "Briefcase"] || Briefcase;
 
     // Parse Branding (Safe)
@@ -64,10 +67,24 @@ export function SectorDetail({ sector }: SectorDetailProps) {
     return (
         <div className="flex-1">
             {/* Hero Banner for Sector */}
-            <section className="relative py-12 md:py-20 bg-[#0B1B32] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0B1B32] via-[#0B1B32]/90 to-transparent z-10" />
-                {/* Abstract Background pattern */}
-                <div className="absolute inset-0 opacity-10 bg-[image:radial-gradient(#4DB6AC_1px,transparent_1px)] bg-[size:30px_30px]"></div>
+            <section className="relative py-12 md:py-20 bg-[#0B1B32] overflow-hidden min-h-[400px]">
+                {/* Hero Background Image */}
+                {heroImage && (
+                    <div className="absolute inset-0 z-0">
+                        <Image
+                            src={heroImage}
+                            alt={sector.title}
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                    </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0B1B32] via-[#0B1B32]/80 to-transparent z-10" />
+                {/* Abstract Background pattern (fallback if no image) */}
+                {!heroImage && (
+                    <div className="absolute inset-0 opacity-10 bg-[image:radial-gradient(#4DB6AC_1px,transparent_1px)] bg-[size:30px_30px]"></div>
+                )}
 
                 <div className="container relative z-20 px-4">
                     <motion.div

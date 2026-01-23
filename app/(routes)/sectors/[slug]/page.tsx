@@ -122,7 +122,11 @@ export default async function SectorPage({ params }: SectorPageProps) {
         return (
             <div className="flex flex-col min-h-screen">
                 <Header />
-                <SectorDetail sector={sector} />
+                <SectorDetail
+                    sector={sector}
+                    heroImage={finalHeroImage}
+                    images={contentImages}
+                />
                 <Footer />
             </div>
         );
