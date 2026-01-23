@@ -54,7 +54,7 @@ export function SectorDetailWater({ sector, heroImage, images }: SectorDetailWat
                 <div className="container px-4">
                     <div className="max-w-4xl mx-auto text-center mb-16">
                         <p className="text-lg md:text-xl text-slate-600 leading-relaxed text-left md:text-justify">
-                            LEADPEC delivers elite manpower for modern wastewater treatment, ensuring seamless integration of advanced biology, precise chemistry, robust mechanics, and intelligent automation. Our specialists support municipal utilities, industrial zones, refineries, and district cooling networks, maintaining effluent quality under the GCC&apos;s toughest environmental and regulatory standards. From Process, Civil, Mechanical, and E&I Engineers to MBR/MBBR experts, commissioning engineers, and multi-skilled technicians, we provide high-caliber teams equipped for high-value, complex projects compliant with <span className="font-bold text-[#0d9488]">SEC, DEWA, FEWA, SWCC, Kahramaa, PAEW, and EWA</span> requirements.
+                            LEADPEC delivers elite manpower for modern wastewater treatment, ensuring seamless integration of advanced biology, precise chemistry, robust mechanics, and intelligent automation. Our specialists support municipal utilities, industrial zones, refineries, and district cooling networks, maintaining effluent quality under the GCC&apos;s toughest environmental and regulatory standards. From Process, Civil, Mechanical, and E&I Engineers to MBR/MBBR experts, commissioning engineers, and multi-skilled technicians, we provide high-caliber teams equipped for high-value, complex projects compliant with <span className="font-bold text-[#0d9488]">MPW, MEW, KEPA, SEC, DEWA, FEWA, SWCC, Kahramaa, PAEW, and EWA</span> requirements.
                         </p>
                     </div>
 
@@ -119,7 +119,7 @@ export function SectorDetailWater({ sector, heroImage, images }: SectorDetailWat
                                 LEADPEC stands at the center of this demand, supplying the specialized manpower that keeps desalination plants running.
                             </p>
                             <p className="text-slate-600 leading-relaxed">
-                                Our network of RO process professionals, membrane specialists, thermal and heat-transfer engineers, combined-cycle integration experts, and fully qualified technical and multinational workforce familiar with SEC, DEWA, FEWA, SWCC, Kahramaa, PAEW, EWA standards.
+                                Our network of RO process professionals, membrane specialists, thermal and heat-transfer engineers, combined-cycle integration experts, and fully qualified technical and multinational workforce familiar with MPW, MEW, KEPA, SEC, DEWA, FEWA, SWCC, Kahramaa, PAEW, EWA standards.
                             </p>
                         </div>
                         <div className="order-1 md:order-2 relative h-[350px] rounded-2xl overflow-hidden shadow-xl">
