@@ -40,7 +40,8 @@ export function AboutContent({ heroBg, collabImg, visionBg, missionCardBg, visio
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#051120]/90" />
+                    <div className="absolute inset-0 bg-[#051120]/40 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#051120] via-[#051120]/30 to-transparent" />
                 </div>
 
                 <div className="container relative z-10 px-4 text-center">
