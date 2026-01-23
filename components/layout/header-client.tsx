@@ -77,7 +77,7 @@ export function HeaderClient({ sectors }: HeaderClientProps) {
                 <div className="container flex items-center justify-between">
                     {/* Logo Section */}
                     <Link href="/" className="flex items-center space-x-2 shrink-0">
-                        <div className="relative w-40 h-12">
+                        <div className="relative w-36 h-11 md:w-44 md:h-14">
                             <Image
                                 src="/logo.png"
                                 alt="LEADPEC Logo"
