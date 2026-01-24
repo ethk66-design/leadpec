@@ -254,7 +254,8 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
                                         <h4 className="text-lg font-bold text-[#0B1B32] mb-2">{step.title}</h4>
                                         <p className="text-gray-600 text-sm">{step.description}</p>
                                     </div>
-                                    {index < processFlow.length - 1 && (
+                                    {/* Only show arrow if not last item AND not at end of row in 4-column grid */}
+                                    {index < processFlow.length - 1 && (index + 1) % 4 !== 0 && (
                                         <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 -right-6 z-10">
                                             <ArrowRight className="w-6 h-6 text-[#008CBA]" />
                                         </div>
