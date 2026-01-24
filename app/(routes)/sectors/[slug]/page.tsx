@@ -97,9 +97,20 @@ export default async function SectorPage({ params }: SectorPageProps) {
     const contentConfig = SECTOR_CONTENT_CONFIG[params.slug] || [];
     const contentAssetKeys = contentConfig.map(c => c.key);
 
+    // Also add standard dynamic keys for sectors (especially those without static config)
+    const sectorSlugUpper = params.slug.toUpperCase().replace(/-/g, '_');
+    const dynamicKeys = [
+        `SECTOR_${sectorSlugUpper}_HERO`,
+        `SECTOR_${sectorSlugUpper}_MIDDLE`,
+        `SECTOR_${sectorSlugUpper}_BOTTOM`
+    ];
+
+    // Merge both key sets (avoid duplicates)
+    const allAssetKeys = [...new Set([...contentAssetKeys, ...dynamicKeys])];
+
     // Fetch all potential assets for this sector
     const contentAssets = await prisma.siteAsset.findMany({
-        where: { key: { in: contentAssetKeys } }
+        where: { key: { in: allAssetKeys } }
     });
 
     // Create a dictionary: { KEY: URL }
@@ -109,6 +120,14 @@ export default async function SectorPage({ params }: SectorPageProps) {
     contentConfig.forEach(config => {
         const asset = contentAssets.find(a => a.key === config.key);
         contentImages[config.key] = asset?.url || config.defaultSrc;
+    });
+
+    // Also populate dynamic keys if found in database
+    dynamicKeys.forEach(key => {
+        const asset = contentAssets.find(a => a.key === key);
+        if (asset?.url) {
+            contentImages[key] = asset.url;
+        }
     });
 
     // 3. Select Component

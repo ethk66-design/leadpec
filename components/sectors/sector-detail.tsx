@@ -252,7 +252,7 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
                                         <p className="text-gray-600 text-sm">{step.description}</p>
                                     </div>
                                     {index < processFlow.length - 1 && (
-                                        <div className="hidden lg:block absolute top-10 -right-4 z-10">
+                                        <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 -right-6 z-10">
                                             <ArrowRight className="w-6 h-6 text-[#008CBA]" />
                                         </div>
                                     )}
