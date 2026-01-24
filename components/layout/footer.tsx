@@ -67,9 +67,6 @@ export async function Footer() {
                                 className="object-contain object-left"
                             />
                         </div>
-                        <p className="text-sm leading-relaxed text-blue-200/60 max-w-xs">
-                            Global Leader in Recruitment, Talent Sourcing & Executive Search. Connecting businesses with top-tier talent worldwide.
-                        </p>
 
                         <div className="space-y-3 pt-2">
                             <div className="flex items-start gap-3 text-sm group">
