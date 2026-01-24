@@ -144,6 +144,11 @@ export function getContentRegistry(sectors: Sector[]): ContentSection[] {
                 description: "Background for the mid-page highlight section."
             },
             {
+                key: `SECTOR_${sector.slug.toUpperCase().replace(/-/g, '_')}_PROCESS`,
+                label: "Process Section Background",
+                description: "Background image for the 'Our Process' section."
+            },
+            {
                 key: `SECTOR_${sector.slug.toUpperCase().replace(/-/g, '_')}_BOTTOM`,
                 label: "Bottom CTA Background",
                 description: "Background for the 'Ready to Start' section near the footer."
