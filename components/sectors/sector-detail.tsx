@@ -58,6 +58,11 @@ interface ProcessStep {
     description: string;
 }
 
+interface Segment {
+    title: string;
+    description: string;
+}
+
 export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
     const IconComponent = iconMap[sector.iconName || "Briefcase"] || Briefcase;
 
@@ -78,6 +83,11 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
             return [];
         }
     }, [sector.process]);
+
+    // Parse Segments from branding (Safe)
+    const segments: Segment[] = React.useMemo(() => {
+        return branding?.segments || [];
+    }, [branding]);
 
     // Get slug for image keys
     const slug = sector.slug.toUpperCase().replace(/-/g, '_');
@@ -203,8 +213,40 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
                 </div>
             </section>
 
-            {/* Middle Feature Section with Image */}
-            {middleImage && (
+            {/* Industry Segments Section - with MIDDLE image background */}
+            {segments.length > 0 && middleImage && (
+                <section className="relative py-12 overflow-hidden">
+                    {/* Background Image */}
+                    <div className="absolute inset-0 z-0">
+                        <Image src={middleImage} alt="Industry Background" fill className="object-cover" />
+                        <div className="absolute inset-0 bg-[#0B1B32]/90" />
+                    </div>
+
+                    <div className="container px-4 relative z-10">
+                        <h2 className="text-3xl font-bold text-white text-center mb-10">
+                            {branding?.segmentsTitle || "Industry Segments We Serve"}
+                        </h2>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+                            {segments.map((segment, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.05 }}
+                                    className="bg-white/10 backdrop-blur-sm p-5 rounded-xl border border-white/20 hover:bg-white/15 transition-colors"
+                                >
+                                    <h4 className="text-lg font-bold text-white mb-2">{segment.title}</h4>
+                                    <p className="text-gray-300 text-sm leading-relaxed">{segment.description}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {/* Middle Feature Section - fallback when no segments but has image */}
+            {segments.length === 0 && middleImage && (
                 <section className="py-10 bg-slate-50">
                     <div className="container px-4">
                         <div className="grid md:grid-cols-2 gap-12 items-center">

@@ -145,8 +145,8 @@ export function getContentRegistry(sectors: Sector[]): ContentSection[] {
             },
             {
                 key: `SECTOR_${sector.slug.toUpperCase().replace(/-/g, '_')}_PROCESS`,
-                label: "Process Section Background",
-                description: "Background image for the 'Our Process' section."
+                label: "Process Section Background (Optional)",
+                description: "Only used if process steps are defined in sector branding."
             },
             {
                 key: `SECTOR_${sector.slug.toUpperCase().replace(/-/g, '_')}_BOTTOM`,
