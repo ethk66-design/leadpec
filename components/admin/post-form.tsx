@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea"; // Ensure this exists, or u
 import { createPost, updatePost } from "@/lib/actions/blog-actions";
 import { Loader2 } from "lucide-react";
 import { Post } from "@prisma/client";
+import { ImageUpload } from "@/components/ui/image-upload";
 
 const formSchema = z.object({
     title: z.string().min(2, "Title is required").max(100, "Title is too long (max 100 chars)"),
@@ -117,11 +118,16 @@ export function PostForm({ initialData }: PostFormProps) {
                     )}
                 </div>
 
+
+
                 {/* Image URL */}
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Cover Image URL</label>
-                    <Input {...form.register("image")} placeholder="/images/blog/..." />
-                    <p className="text-xs text-gray-400">Upload image separately and paste path here, or use external URL.</p>
+                    <ImageUpload
+                        label="Cover Image"
+                        value={form.watch("image") || ""}
+                        onChange={(url) => form.setValue("image", url)}
+                        description="Upload a cover image for the blog post (Recommended: 1200x600px)"
+                    />
                 </div>
 
                 {/* Author */}

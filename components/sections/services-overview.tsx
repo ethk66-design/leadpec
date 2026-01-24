@@ -46,6 +46,7 @@ export function ServicesOverview({ hideViewAll = false }: ServicesOverviewProps)
                                         alt={service.title}
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        sizes="(min-width: 768px) 50vw, 100vw"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B32]/60 to-transparent group-hover:from-[#0B1B32]/40 transition-all" />
                                 </div>

@@ -2,28 +2,33 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { SectorsContent } from "@/components/pages/sectors-content";
 import { prisma } from "@/lib/db";
-import { SECTOR_IMAGES, SLUG_TO_ASSET_KEY } from "@/lib/sector-images";
+import { SECTOR_IMAGES, getSectorHeroAssetKey } from "@/lib/sector-images";
 
 export const dynamic = 'force-dynamic';
 
 export default async function SectorsPage() {
     let sectors: any[] = [];
     if (prisma) {
-        const [dbSectors, sectorAssets] = await Promise.all([
-            prisma.sector.findMany({
-                orderBy: { title: 'asc' }
-            }),
-            prisma.siteAsset.findMany({
-                where: {
-                    key: {
-                        in: Object.values(SLUG_TO_ASSET_KEY)
-                    }
-                }
-            })
-        ]);
+        // 1. Fetch all sectors first
+        const dbSectors = await prisma.sector.findMany({
+            orderBy: { title: 'asc' }
+        });
 
+        // 2. Determine all needed asset keys
+        const assetKeys = dbSectors.map(s => getSectorHeroAssetKey(s.slug));
+
+        // 3. Fetch assets in one batch
+        const sectorAssets = await prisma.siteAsset.findMany({
+            where: {
+                key: {
+                    in: assetKeys
+                }
+            }
+        });
+
+        // 4. Map sectors with resolved images
         sectors = dbSectors.map(sector => {
-            const assetKey = SLUG_TO_ASSET_KEY[sector.slug];
+            const assetKey = getSectorHeroAssetKey(sector.slug);
             const asset = sectorAssets.find(a => a.key === assetKey);
 
             // Fix: Ignore legacy seed paths that don't exist

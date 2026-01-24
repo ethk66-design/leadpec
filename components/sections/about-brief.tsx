@@ -61,6 +61,7 @@ export function AboutBrief() {
                             alt="Leadpec Corporate Team"
                             fill
                             className="object-cover"
+                            sizes="(min-width: 1024px) 50vw, 100vw"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#051120]/60 to-transparent" />
                     </motion.div>

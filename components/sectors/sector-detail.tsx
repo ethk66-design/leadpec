@@ -168,12 +168,12 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
                                         <h2 className="text-[#008CBA] font-bold tracking-widest uppercase mb-2 text-sm">
                                             {branding.heroSubtitle || "Sector Overview"}
                                         </h2>
-                                        <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+                                        <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
                                             {branding.heroTitle}
                                         </h1>
                                     </>
                                 ) : (
-                                    <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+                                    <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
                                         {sector.title}
                                     </h1>
                                 )}

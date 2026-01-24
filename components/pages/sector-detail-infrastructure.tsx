@@ -37,7 +37,7 @@ export function SectorDetailInfrastructure({ sector, heroImage, images }: Sector
                         transition={{ duration: 1 }}
                         className="max-w-5xl"
                     >
-                        <h1 className="text-5xl md:text-8xl font-black text-white mb-6 tracking-tight uppercase font-heading">
+                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight uppercase font-heading">
                             INFRASTRUCTURE & <br /> <span className="text-[#4DB6AC]">UTILITIES</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-300 max-w-3xl font-light leading-relaxed italic border-l-4 border-[#4DB6AC] pl-6">

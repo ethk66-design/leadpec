@@ -71,7 +71,8 @@ export function GlobalPresence() {
                                 src="/images/global-map-dark.png" // We can keep this but fade it largely out or just remove it if it clashes. Let's keep distinct texture but heavily faded.
                                 alt="Global Presence Map"
                                 fill
-                                className="object-cover grayscale invert" // Invert to make it light/dark compatible if needed, or just keep it as subtle texture. Let's try invert to match light theme.
+                                className="object-cover grayscale invert"
+                                sizes="(min-width: 1024px) 66vw, 100vw"
                             />
                         </div>
                         <div className="relative z-10 w-full h-full">

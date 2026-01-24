@@ -25,3 +25,7 @@ export const SLUG_TO_ASSET_KEY: Record<string, string> = {
     'hospitality-catering': 'SECTOR_HOSPITALITY_HERO',
     'operation-maintenance': 'SECTOR_OM_HERO',
 };
+
+export function getSectorHeroAssetKey(slug: string): string {
+    return SLUG_TO_ASSET_KEY[slug] || `SECTOR_${slug.toUpperCase().replace(/-/g, '_')}_HERO`;
+}

@@ -26,22 +26,13 @@ const iconMap = {
 };
 
 import { useState, useEffect } from "react";
-import { getSiteAssetAction } from "@/lib/public-actions";
 
-export function WhyChooseUs() {
-    const [bgImage, setBgImage] = useState<string | null>(null);
-    const [sideImage, setSideImage] = useState<string>("/images/consultation-team.jpg");
+interface WhyChooseUsProps {
+    bgImage?: string | null;
+    sideImage?: string | null;
+}
 
-    useEffect(() => {
-        const fetchAssets = async () => {
-            const bg = await getSiteAssetAction("WHY_CHOOSE_US_BG");
-            if (bg) setBgImage(bg);
-
-            const side = await getSiteAssetAction("WHY_CHOOSE_US_SIDE_IMG");
-            if (side) setSideImage(side);
-        };
-        fetchAssets();
-    }, []);
+export function WhyChooseUs({ bgImage, sideImage = "/images/consultation-team.jpg" }: WhyChooseUsProps) {
 
     const bgRef = React.useRef<HTMLDivElement>(null);
 
@@ -121,10 +112,11 @@ export function WhyChooseUs() {
                     <div className="w-full lg:w-2/5">
                         <div className="relative h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
                             <Image
-                                src={sideImage}
+                                src={sideImage || "/images/consultation-team.jpg"}
                                 alt="Professional Consultation"
                                 fill
                                 className="object-cover"
+                                sizes="(min-width: 1024px) 40vw, 100vw"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B32]/80 via-transparent to-transparent" />
                         </div>

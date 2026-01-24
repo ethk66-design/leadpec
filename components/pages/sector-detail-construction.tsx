@@ -50,7 +50,7 @@ export function SectorDetailConstruction({ sector, heroImage, images }: SectorDe
                         <h2 className="text-[#008CBA] font-bold tracking-[0.2em] uppercase mb-4 text-sm md:text-base border-2 border-[#008CBA] inline-block px-4 py-1 rounded-sm">
                             Build With The Best
                         </h2>
-                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight font-heading max-w-4xl">
+                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-heading max-w-4xl">
                             ENGINEERING & CONSTRUCTION
                             <span className="block text-2xl md:text-3xl font-light text-[#008CBA] mt-4">
                                 (Design & Build, High End Fit Out, PPP, PFI, BOT, BOOT)
