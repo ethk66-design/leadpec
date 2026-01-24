@@ -102,6 +102,7 @@ export default async function SectorPage({ params }: SectorPageProps) {
     const dynamicKeys = [
         `SECTOR_${sectorSlugUpper}_HERO`,
         `SECTOR_${sectorSlugUpper}_MIDDLE`,
+        `SECTOR_${sectorSlugUpper}_PROCESS`,
         `SECTOR_${sectorSlugUpper}_BOTTOM`
     ];
 

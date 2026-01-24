@@ -82,8 +82,10 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
     // Get slug for image keys
     const slug = sector.slug.toUpperCase().replace(/-/g, '_');
     const middleImageKey = `SECTOR_${slug}_MIDDLE`;
+    const processImageKey = `SECTOR_${slug}_PROCESS`;
     const bottomImageKey = `SECTOR_${slug}_BOTTOM`;
     const middleImage = images?.[middleImageKey];
+    const processImage = images?.[processImageKey];
     const bottomImage = images?.[bottomImageKey];
 
     return (
@@ -151,9 +153,9 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
             </section>
 
             {/* Main Content */}
-            <section className="py-12 md:py-16 bg-white">
+            <section className="py-10 md:py-12 bg-white">
                 <div className="container px-4">
-                    <div className="grid lg:grid-cols-3 gap-12">
+                    <div className="grid lg:grid-cols-3 gap-8">
                         {/* Left Column: Content */}
                         <div className="lg:col-span-2">
                             <motion.div
@@ -203,7 +205,7 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
 
             {/* Middle Feature Section with Image */}
             {middleImage && (
-                <section className="py-16 bg-slate-50">
+                <section className="py-10 bg-slate-50">
                     <div className="container px-4">
                         <div className="grid md:grid-cols-2 gap-12 items-center">
                             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
@@ -232,12 +234,22 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
 
             {/* Process Flow Section */}
             {processFlow.length > 0 && (
-                <section className="py-16 bg-white">
-                    <div className="container px-4">
-                        <h2 className="text-3xl font-bold text-[#0B1B32] text-center mb-12">
+                <section className="relative py-12 overflow-hidden">
+                    {/* Background Image or Gradient */}
+                    {processImage ? (
+                        <div className="absolute inset-0 z-0">
+                            <Image src={processImage} alt="Process Background" fill className="object-cover" />
+                            <div className="absolute inset-0 bg-[#0B1B32]/90" />
+                        </div>
+                    ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#0B1B32] via-[#0d2341] to-[#1a3a5c]" />
+                    )}
+
+                    <div className="container px-4 relative z-10">
+                        <h2 className="text-3xl font-bold text-white text-center mb-10">
                             {branding?.processTitle || "Our Process"}
                         </h2>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {processFlow.map((step, index) => (
                                 <motion.div
                                     key={index}
@@ -247,17 +259,17 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
                                     transition={{ delay: index * 0.1 }}
                                     className="relative"
                                 >
-                                    <div className="bg-slate-50 p-6 rounded-xl border border-slate-100 h-full">
+                                    <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 h-full">
                                         <div className="w-10 h-10 bg-[#008CBA] text-white rounded-full flex items-center justify-center font-bold mb-4">
                                             {index + 1}
                                         </div>
-                                        <h4 className="text-lg font-bold text-[#0B1B32] mb-2">{step.title}</h4>
-                                        <p className="text-gray-600 text-sm">{step.description}</p>
+                                        <h4 className="text-lg font-bold text-white mb-2">{step.title}</h4>
+                                        <p className="text-gray-300 text-sm">{step.description}</p>
                                     </div>
                                     {/* Only show arrow if not last item AND not at end of row in 4-column grid */}
                                     {index < processFlow.length - 1 && (index + 1) % 4 !== 0 && (
-                                        <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 -right-6 z-10">
-                                            <ArrowRight className="w-6 h-6 text-[#008CBA]" />
+                                        <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 -right-4 z-10">
+                                            <ArrowRight className="w-5 h-5 text-[#4DB6AC]" />
                                         </div>
                                     )}
                                 </motion.div>
