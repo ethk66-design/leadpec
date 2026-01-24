@@ -87,18 +87,24 @@ async function main() {
 
     // 3. Seed Default Admin User
     console.log('👤 Seeding Default Admin...');
-    const password = await hash('SecurePass123!', 12);
-    const admin = await prisma.user.upsert({
-        where: { email: 'admin@leedpec.com' },
-        update: {}, // Don't reset password if exists
-        create: {
-            email: 'admin@leedpec.com',
-            name: 'Super Admin',
-            password,
-            // role: 'ADMIN', // REMOVED: Not in Schema
-        },
-    });
-    console.log(`   - Admin ready: ${admin.email}`);
+
+    const adminPassword = process.env.ADMIN_DEFAULT_PASSWORD;
+    if (!adminPassword) {
+        console.warn('⚠️  ADMIN_DEFAULT_PASSWORD not set. Skipping admin user creation.');
+        console.warn('   Set this env var and re-run seed to create admin user.');
+    } else {
+        const password = await hash(adminPassword, 12);
+        const admin = await prisma.user.upsert({
+            where: { email: 'admin@leadpec.com' },
+            update: {}, // Don't reset password if exists
+            create: {
+                email: 'admin@leadpec.com',
+                name: 'Super Admin',
+                password,
+            },
+        });
+        console.log(`   - Admin ready: ${admin.email}`);
+    }
 
     console.log('✨ Seeding completed.');
 }

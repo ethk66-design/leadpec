@@ -4,25 +4,33 @@ import { hash } from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function resetAdmin() {
+    const adminPassword = process.env.ADMIN_DEFAULT_PASSWORD;
+
+    if (!adminPassword) {
+        console.error('❌ ADMIN_DEFAULT_PASSWORD environment variable is required');
+        console.error('   Set it in your .env file before running this script');
+        process.exit(1);
+    }
+
     console.log('🔑 Resetting admin password...');
 
-    const newPassword = await hash('SecurePass123!', 12);
+    const newPassword = await hash(adminPassword, 12);
 
     const admin = await prisma.user.upsert({
-        where: { email: 'admin@leedpec.com' },
+        where: { email: 'admin@leadpec.com' },
         update: {
-            password: newPassword  // Force update password
+            password: newPassword
         },
         create: {
-            email: 'admin@leedpec.com',
+            email: 'admin@leadpec.com',
             name: 'Super Admin',
             password: newPassword,
         },
     });
 
     console.log(`✅ Admin password reset for: ${admin.email}`);
-    console.log('📧 Email: admin@leedpec.com');
-    console.log('🔐 Password: SecurePass123!');
+    console.log('📧 Email: admin@leadpec.com');
+    console.log('🔐 Password: (set via ADMIN_DEFAULT_PASSWORD env var)');
 }
 
 resetAdmin()
