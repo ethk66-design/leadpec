@@ -1,10 +1,17 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { SECTORS } from "@/lib/constants";
+import { auth } from "@/auth";
 
 export const dynamic = 'force-dynamic'; // Prevent static generation
 
 export async function GET() {
+    // Security: Only authenticated admins can seed
+    const session = await auth();
+    if (!session || !session.user) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     if (!prisma) {
         return NextResponse.json({ success: false, error: "Database not available" }, { status: 503 });
     }

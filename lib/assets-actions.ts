@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { deleteOldBlob } from "@/lib/blob-utils";
+import { requireAuth } from "@/lib/auth-utils";
 
 export async function getSiteAssets() {
     if (!prisma) return [];
@@ -19,6 +20,14 @@ export async function getSiteAssets() {
 
 export async function updateSiteAsset(key: string, url: string) {
     if (!prisma) return { error: "Database not available" };
+
+    // Security: Require authentication
+    try {
+        await requireAuth();
+    } catch (e) {
+        return { error: "Unauthorized" };
+    }
+
     try {
         // Get existing asset to delete old blob
         const existing = await prisma.siteAsset.findUnique({ where: { key } });
