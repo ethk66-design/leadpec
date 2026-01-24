@@ -75,19 +75,44 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
         }
     }, [sector.branding]);
 
-    // Parse Process Flow (Safe)
-    const processFlow: ProcessStep[] = React.useMemo(() => {
+    // Parse Process Flow OR Segments from process field (Safe)
+    // The process field can contain either:
+    // 1. Array of process steps: [{"title": "Step 1", "description": "..."}]
+    // 2. Object with segments: {"segmentsTitle": "...", "segments": [...]}
+    const parsedProcess = React.useMemo(() => {
         try {
-            return sector.process ? JSON.parse(sector.process) : [];
+            return sector.process ? JSON.parse(sector.process) : null;
         } catch (e) {
-            return [];
+            return null;
         }
     }, [sector.process]);
 
-    // Parse Segments from branding (Safe)
+    // Check if process field contains segments (object with segments array)
+    const processHasSegments = parsedProcess && !Array.isArray(parsedProcess) && parsedProcess.segments;
+
+    // Extract process flow (only if it's an array)
+    const processFlow: ProcessStep[] = React.useMemo(() => {
+        if (Array.isArray(parsedProcess)) {
+            return parsedProcess;
+        }
+        return [];
+    }, [parsedProcess]);
+
+    // Parse Segments - from process field (if object format) OR from branding
     const segments: Segment[] = React.useMemo(() => {
+        // First check process field for segments format
+        if (processHasSegments) {
+            return parsedProcess.segments || [];
+        }
+        // Fallback to branding segments
         return branding?.segments || [];
-    }, [branding]);
+    }, [processHasSegments, parsedProcess, branding]);
+
+    // Get segments title from process field or branding
+    const segmentsTitle = processHasSegments
+        ? parsedProcess.segmentsTitle
+        : branding?.segmentsTitle;
+
 
     // Get slug for image keys
     const slug = sector.slug.toUpperCase().replace(/-/g, '_');
@@ -224,7 +249,7 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
 
                     <div className="container px-4 relative z-10">
                         <h2 className="text-3xl font-bold text-white text-center mb-10">
-                            {branding?.segmentsTitle || "Industry Segments We Serve"}
+                            {segmentsTitle || "Industry Segments We Serve"}
                         </h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
                             {segments.map((segment, index) => (
