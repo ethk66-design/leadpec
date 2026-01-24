@@ -1,5 +1,6 @@
 import LoginForm from '@/components/admin/login-form';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function LoginPage() {
     return (
@@ -18,8 +19,18 @@ export default function LoginPage() {
                 <div className="bg-[#0B1B32] px-6 py-8 rounded-xl border border-white/5 shadow-2xl">
                     <h1 className="text-2xl font-bold text-white mb-6 text-center">Admin Access</h1>
                     <LoginForm />
+                    <div className="mt-4 text-center">
+                        <Link
+                            href="/admin/forgot-password"
+                            className="text-sm text-[#008CBA] hover:text-[#00b4e6] transition-colors"
+                        >
+                            Forgot Password?
+                        </Link>
+                    </div>
                 </div>
             </div>
         </main>
+    );
+}
     );
 }
