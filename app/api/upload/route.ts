@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { put } from "@vercel/blob";
+import { auth } from "@/auth";
 
 export async function POST(request: NextRequest) {
+    // Security: Verify authentication before allowing uploads
+    const session = await auth();
+    if (!session || !session.user) {
+        return NextResponse.json({ error: "Unauthorized. Please log in." }, { status: 401 });
+    }
+
     try {
         const formData = await request.formData();
         const file = formData.get("file") as File | null;

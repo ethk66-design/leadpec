@@ -75,6 +75,7 @@ export async function deleteJob(id: string) {
 export async function toggleJobStatus(id: string, isActive: boolean) {
     if (!prisma) return { error: "Database not available" };
     try {
+        await requireAuth();
         await prisma.job.update({
             where: { id },
             data: { isActive: !isActive }
