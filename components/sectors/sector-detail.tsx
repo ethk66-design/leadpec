@@ -238,14 +238,18 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
                 </div>
             </section>
 
-            {/* Industry Segments Section - with MIDDLE image background */}
-            {segments.length > 0 && middleImage && (
+            {/* Industry Segments Section - with MIDDLE image background or gradient fallback */}
+            {segments.length > 0 && (
                 <section className="relative py-12 overflow-hidden">
-                    {/* Background Image */}
-                    <div className="absolute inset-0 z-0">
-                        <Image src={middleImage} alt="Industry Background" fill className="object-cover" />
-                        <div className="absolute inset-0 bg-[#0B1B32]/90" />
-                    </div>
+                    {/* Background Image or Gradient */}
+                    {middleImage ? (
+                        <div className="absolute inset-0 z-0">
+                            <Image src={middleImage} alt="Industry Background" fill className="object-cover" />
+                            <div className="absolute inset-0 bg-[#0B1B32]/90" />
+                        </div>
+                    ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#0B1B32] via-[#0d2341] to-[#1a3a5c]" />
+                    )}
 
                     <div className="container px-4 relative z-10">
                         <h2 className="text-3xl font-bold text-white text-center mb-10">
