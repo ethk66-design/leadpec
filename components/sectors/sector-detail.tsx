@@ -119,9 +119,12 @@ export function SectorDetail({ sector, heroImage, images }: SectorDetailProps) {
                         </Link>
 
                         <div className="flex items-center gap-6 mb-6">
-                            <div className="p-4 bg-white/5 rounded-lg border border-white/10 backdrop-blur-sm">
-                                <IconComponent className="w-12 h-12 text-[#4DB6AC]" />
-                            </div>
+                            {/* Only show icon if explicitly set (not for dynamically created sectors without an icon) */}
+                            {sector.iconName && (
+                                <div className="p-4 bg-white/5 rounded-lg border border-white/10 backdrop-blur-sm">
+                                    <IconComponent className="w-12 h-12 text-[#4DB6AC]" />
+                                </div>
+                            )}
                             <div>
                                 {branding?.heroTitle ? (
                                     <>
