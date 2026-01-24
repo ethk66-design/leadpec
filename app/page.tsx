@@ -6,7 +6,7 @@ import { HeroSection } from "@/components/sections/hero";
 import { TrustIndicators } from "@/components/sections/trust-indicators";
 // Static imports removed in favor of dynamic imports below
 import { prisma } from "@/lib/db";
-import { SECTOR_IMAGES, SLUG_TO_ASSET_KEY, getSectorHeroAssetKey } from "@/lib/sector-images";
+import { SECTOR_IMAGES, getSectorHeroAssetKey } from "@/lib/sector-images";
 import { SECTORS } from "@/lib/constants";
 import dynamic from "next/dynamic";
 
