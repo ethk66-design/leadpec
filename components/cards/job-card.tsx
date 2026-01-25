@@ -32,6 +32,11 @@ export function JobCard({ job }: JobCardProps) {
                 </div>
             </CardHeader>
             <CardContent className="flex-grow pb-4">
+                {job.image && (
+                    <div className="mb-4 aspect-video rounded-md overflow-hidden bg-slate-800">
+                        <img src={job.image} alt={job.title} className="w-full h-full object-cover" />
+                    </div>
+                )}
                 <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-gray-400 mb-4">
                     <div className="flex items-center gap-1.5">
                         <MapPin className="w-3.5 h-3.5 text-[#008CBA]" />

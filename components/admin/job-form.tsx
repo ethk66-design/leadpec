@@ -16,6 +16,7 @@ import Link from "next/link";
 import { useFormStatus } from "react-dom";
 import { useState } from "react";
 import { SECTORS } from "@/lib/constants";
+import { ImageUpload } from "@/components/ui/image-upload";
 
 interface JobFormProps {
     job?: Job;
@@ -24,6 +25,7 @@ interface JobFormProps {
 export function JobForm({ job }: JobFormProps) {
     // If job exists, we are editing. Otherwise creating.
     const isEditing = !!job;
+    const [image, setImage] = useState(job?.image || "");
     const handleSubmit = async (formData: FormData) => {
         const result = isEditing
             ? await updateJob(job.id, formData)
@@ -96,6 +98,17 @@ export function JobForm({ job }: JobFormProps) {
             <div className="space-y-2">
                 <label className="text-sm font-medium">Required Skills (Optional)</label>
                 <Input name="skills" defaultValue={job?.skills} placeholder="e.g. AutoCAD, PMP, Offshore Safety (Comma separated)" />
+            </div>
+
+            <div className="space-y-2">
+                <label className="text-sm font-medium">Cover Image (Optional)</label>
+                <input type="hidden" name="image" value={image} />
+                <ImageUpload
+                    value={image}
+                    onChange={setImage}
+                    label="Job Cover Image"
+                    description="Upload an image to be displayed on the job card (Recommended: 800x600px)."
+                />
             </div>
 
             <div className="flex items-center gap-4 pt-4">

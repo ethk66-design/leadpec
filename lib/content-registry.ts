@@ -128,6 +128,44 @@ const BLOG_SECTION: ContentSection = {
     ]
 };
 
+
+const CAREERS_SECTION: ContentSection = {
+    id: "careers",
+    title: "🚀 Careers Page",
+    assets: [
+        {
+            key: "CAREERS_HERO_BG",
+            label: "Careers Hero Background",
+            description: "Main hero image for the Careers page.",
+            defaultSrc: "/images/careers-hero.jpg"
+        },
+        {
+            key: "CAREERS_OFFICE",
+            label: "Office Life Image",
+            description: "Image showcasing the office environment.",
+            defaultSrc: "/images/careers-office.jpg"
+        },
+        {
+            key: "CAREERS_CULTURE",
+            label: "Company Culture Image",
+            description: "Image highlighting company culture and values.",
+            defaultSrc: "/images/careers-culture.jpg"
+        },
+        {
+            key: "CAREERS_GROWTH",
+            label: "Growth & Development Image",
+            description: "Image for the growth and career path section.",
+            defaultSrc: "/images/careers-growth.jpg"
+        },
+        {
+            key: "CAREERS_GLOBAL_MAP",
+            label: "Global Presence Map",
+            description: "Map or image showing global operations.",
+            defaultSrc: "/images/careers-global-map.jpg"
+        }
+    ]
+};
+
 // 2. Dynamic Generator Function
 export function getContentRegistry(sectors: Sector[]): ContentSection[] {
     const sectorSections: ContentSection[] = sectors.map(sector => {
@@ -182,6 +220,7 @@ export function getContentRegistry(sectors: Sector[]): ContentSection[] {
         ABOUT_SECTION,
         SERVICES_SECTION,
         BLOG_SECTION,
+        CAREERS_SECTION,
         ...sectorSections
     ];
 }

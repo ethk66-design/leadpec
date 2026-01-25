@@ -41,6 +41,7 @@ model Job {
   isActive    Boolean  @default(true)
   postedDate  DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  image       String?  // URL to job cover image
   applications Application[]
 }
 

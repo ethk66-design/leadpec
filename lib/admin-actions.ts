@@ -117,6 +117,7 @@ export async function createJob(formData: FormData) {
                 type,
                 description,
                 skills: skills || "",
+                image: (formData.get("image") as string) || null,
             }
         });
     } catch (error) {
@@ -159,6 +160,7 @@ export async function updateJob(id: string, formData: FormData) {
                 type,
                 description,
                 skills: skills || "",
+                image: (formData.get("image") as string) || null,
             }
         });
     } catch (error) {
