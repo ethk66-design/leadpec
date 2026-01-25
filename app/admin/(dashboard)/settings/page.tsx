@@ -1,14 +1,11 @@
 import { prisma } from "@/lib/db";
 import { SettingsForm } from "@/components/admin/settings-form";
-import { AssetsManager } from "@/components/admin/assets-manager";
-import { Separator } from "@/components/ui/separator";
 
 export const dynamic = 'force-dynamic';
 
 export default async function SettingsPage() {
     // Fetch all relevant settings
     let settings: any[] = [];
-    let assets: any[] = [];
 
     if (prisma) {
         settings = await prisma.siteSetting.findMany({
@@ -17,11 +14,6 @@ export default async function SettingsPage() {
                     in: ["footer_image", "social_linkedin", "social_facebook", "social_instagram"]
                 }
             }
-        });
-
-        // Fetch site assets
-        assets = await prisma.siteAsset.findMany({
-            orderBy: { key: 'asc' }
         });
     }
 
@@ -44,15 +36,6 @@ export default async function SettingsPage() {
                 facebookUrl={settingsMap["social_facebook"] || null}
                 instagramUrl={settingsMap["social_instagram"] || null}
             />
-
-            <Separator className="my-8" />
-
-            <div>
-                <h3 className="text-2xl font-bold tracking-tight mb-4">Dynamic Assets</h3>
-                <p className="text-muted-foreground mb-6">Manage website images and backgrounds.</p>
-                <AssetsManager assets={assets} />
-            </div>
         </div>
     );
 }
-
