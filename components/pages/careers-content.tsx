@@ -24,7 +24,8 @@ export function CareersContent({ jobs, heroBg, officeImg, cultureImg, growthImg,
             {/* 1. Talent Hero */}
             <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#0B1B32]">
                 <div
-                    className="absolute inset-0 z-0 bg-cover bg-center fixed bg-[url('/images/careers-hero.png')]"
+                    className="absolute inset-0 z-0 bg-cover bg-center fixed"
+                    style={{ backgroundImage: `url('${heroBg || '/images/careers-hero.png'}')` }}
                 >
                     <div className="absolute inset-0 bg-[#0B1B32]/80 mix-blend-multiply" />
                     <div className="absolute inset-0 bg-gradient-to-r from-[#0B1B32] via-transparent to-[#0B1B32]/40" />
@@ -112,18 +113,18 @@ export function CareersContent({ jobs, heroBg, officeImg, cultureImg, growthImg,
                             <div className="grid grid-cols-2 gap-4 h-full relative z-10">
                                 <div className="space-y-4 pt-8">
                                     <div className="relative h-[200px] rounded-xl overflow-hidden shadow-lg">
-                                        <Image src="/images/careers-office.png" alt="Office" fill className="object-cover" />
+                                        <Image src={officeImg || "/images/careers-office.png"} alt="Office" fill className="object-cover" />
                                     </div>
                                     <div className="relative h-[160px] rounded-xl overflow-hidden shadow-lg">
-                                        <Image src="/images/careers-growth.png" alt="Growth" fill className="object-cover" />
+                                        <Image src={growthImg || "/images/careers-growth.png"} alt="Growth" fill className="object-cover" />
                                     </div>
                                 </div>
                                 <div className="space-y-4">
                                     <div className="relative h-[160px] rounded-xl overflow-hidden shadow-lg">
-                                        <Image src="/images/careers-culture.png" alt="Culture" fill className="object-cover" />
+                                        <Image src={cultureImg || "/images/careers-culture.png"} alt="Culture" fill className="object-cover" />
                                     </div>
                                     <div className="relative h-[240px] rounded-xl overflow-hidden shadow-lg">
-                                        <Image src="/images/careers-global.png" alt="Global" fill className="object-cover grayscale" />
+                                        <Image src={globalImg || "/images/careers-global.png"} alt="Global" fill className="object-cover grayscale" />
                                         <div className="absolute inset-0 bg-[#0ea5e9]/20 mix-blend-overlay" />
                                     </div>
                                 </div>
