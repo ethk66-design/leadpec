@@ -6,9 +6,13 @@ import { Mail, Phone, MapPin, Send, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/contact-form";
 import Link from "next/link";
-import Image from "next/image";
+import { DynamicImage } from "@/components/ui/dynamic-image";
 
-export function ContactContent() {
+interface ContactContentProps {
+    supportImage?: string | null;
+}
+
+export function ContactContent({ supportImage }: ContactContentProps) {
     return (
         <main className="flex-1">
             {/* Hero Section */}
@@ -56,8 +60,9 @@ export function ContactContent() {
                             className="space-y-10"
                         >
                             <div className="relative h-64 w-full rounded-xl overflow-hidden shadow-lg border border-white/10">
-                                <Image
-                                    src="/images/contact-support.png"
+                                <DynamicImage
+                                    src={supportImage || "/images/contact-support.png"}
+                                    fallbackSrc="/images/contact-support.png"
                                     alt="Customer Support"
                                     fill
                                     className="object-cover"

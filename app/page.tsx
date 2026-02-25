@@ -25,6 +25,8 @@ export default async function Home() {
     let heroAsset: any = { url: "/images/hero-corporate.png" }; // Default hero
     let whyChooseUsBg: string | null = null;
     let whyChooseUsSide: string | null = null;
+    let aboutImg: string | null = null;
+    let mapImg: string | null = null;
 
     if (prisma) {
         try {
@@ -40,7 +42,7 @@ export default async function Home() {
             // 2. Determine Asset Keys
             // Include both dynamic keys from sectors AND static keys for other sections
             const dynamicSectorKeys = dbSectors.map(s => getSectorHeroAssetKey(s.slug));
-            const otherKeys = ["WHY_CHOOSE_US_BG", "WHY_CHOOSE_US_SIDE_IMG"];
+            const otherKeys = ["WHY_CHOOSE_US_BG", "WHY_CHOOSE_US_SIDE_IMG", "HOME_ABOUT_IMG", "HOME_MAP_IMG"];
             const allKeys = [...dynamicSectorKeys, ...otherKeys];
 
             const sectorAssets = await prisma.siteAsset.findMany({
@@ -82,6 +84,12 @@ export default async function Home() {
 
             const wcuSideAsset = sectorAssets.find(a => a.key === "WHY_CHOOSE_US_SIDE_IMG");
             if (wcuSideAsset) whyChooseUsSide = wcuSideAsset.url;
+
+            const aboutAsset = sectorAssets.find(a => a.key === "HOME_ABOUT_IMG");
+            if (aboutAsset) aboutImg = aboutAsset.url;
+
+            const mapAsset = sectorAssets.find(a => a.key === "HOME_MAP_IMG");
+            if (mapAsset) mapImg = mapAsset.url;
         } catch (e) {
             console.warn("Database connection failed, using static fallbacks");
         }
@@ -96,11 +104,11 @@ export default async function Home() {
             <Header />
             <HeroSection heroImage={heroAsset?.url} />
             <TrustIndicators />
-            <AboutBrief />
+            <AboutBrief aboutImage={aboutImg} />
             <ServicesOverview />
             <SectorsGrid sectors={sectors} />
             <WhyChooseUs bgImage={whyChooseUsBg} sideImage={whyChooseUsSide} />
-            <GlobalPresence />
+            <GlobalPresence mapImage={mapImg} />
             <CTASection />
             <Footer />
         </main>

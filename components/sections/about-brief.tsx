@@ -4,10 +4,14 @@ import { Button } from "@/components/ui/button";
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import { DynamicImage } from "@/components/ui/dynamic-image";
 
-export function AboutBrief() {
+interface AboutBriefProps {
+    aboutImage?: string | null;
+}
+
+export function AboutBrief({ aboutImage }: AboutBriefProps) {
     return (
         <section className="py-12 md:py-20 bg-gray-50 overflow-hidden">
             <div className="container px-4">
@@ -56,8 +60,9 @@ export function AboutBrief() {
                         transition={{ duration: 0.6 }}
                         className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl"
                     >
-                        <Image
-                            src="/images/about-corporate-meeting.png"
+                        <DynamicImage
+                            src={aboutImage || "/images/about-corporate-meeting.png"}
+                            fallbackSrc="/images/about-corporate-meeting.png"
                             alt="Leadpec Corporate Team"
                             fill
                             className="object-cover"

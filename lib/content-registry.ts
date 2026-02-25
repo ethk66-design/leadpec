@@ -37,6 +37,18 @@ const HOME_SECTION: ContentSection = {
             label: "Main Hero Background",
             description: "The large image at the very top of the home page.",
             defaultSrc: "/images/hero-corporate.png"
+        },
+        {
+            key: "HOME_ABOUT_IMG",
+            label: "About Section Image",
+            description: "Image displayed in the brief About section on home page.",
+            defaultSrc: "/images/about-corporate-meeting.png"
+        },
+        {
+            key: "HOME_MAP_IMG",
+            label: "Global Presence Map",
+            description: "Map image displayed in the Global Presence section.",
+            defaultSrc: "/images/global-map-dark.png"
         }
     ]
 };
@@ -87,6 +99,12 @@ const SERVICES_SECTION: ContentSection = {
             label: "General Services Hero (Fallback)",
             description: "Default hero image for services that don't have a specific override.",
             defaultSrc: "/images/services-hero-industrial.png"
+        },
+        {
+            key: "SERVICES_PROCESS_BG",
+            label: "Services Process Background",
+            description: "Background image for the Our Process section on the Services page.",
+            defaultSrc: "/images/process-flow-background.png"
         },
         {
             key: "SERVICE_EXECUTIVE_IMG",
@@ -166,6 +184,19 @@ const CAREERS_SECTION: ContentSection = {
     ]
 };
 
+const CONTACT_SECTION: ContentSection = {
+    id: "contact",
+    title: "📞 Contact Page",
+    assets: [
+        {
+            key: "CONTACT_SUPPORT_IMG",
+            label: "Contact Support Image",
+            description: "Image displayed next to the contact form.",
+            defaultSrc: "/images/contact-support.png"
+        }
+    ]
+};
+
 // 2. Dynamic Generator Function
 export function getContentRegistry(sectors: Sector[]): ContentSection[] {
     const sectorSections: ContentSection[] = sectors.map(sector => {
@@ -221,6 +252,7 @@ export function getContentRegistry(sectors: Sector[]): ContentSection[] {
         SERVICES_SECTION,
         BLOG_SECTION,
         CAREERS_SECTION,
+        CONTACT_SECTION,
         ...sectorSections
     ];
 }

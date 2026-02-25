@@ -17,7 +17,13 @@ const OfficeMap = dynamic(() => import("@/components/maps/office-map"), {
     )
 });
 
-export function GlobalPresence() {
+import { DynamicImage } from "@/components/ui/dynamic-image";
+
+interface GlobalPresenceProps {
+    mapImage?: string | null;
+}
+
+export function GlobalPresence({ mapImage }: GlobalPresenceProps) {
     const [selectedCity, setSelectedCity] = useState<string | null>(null);
 
     return (
@@ -67,8 +73,9 @@ export function GlobalPresence() {
                     <div className="lg:w-2/3 relative h-[500px] bg-[#FDFBF7] rounded-3xl overflow-hidden border border-gray-100 shadow-xl group">
                         {/* Background Map Image - Subtle Texture for Light Theme */}
                         <div className="absolute inset-0 z-0 opacity-10 mix-blend-multiply pointer-events-none">
-                            <Image
-                                src="/images/global-map-dark.png" // We can keep this but fade it largely out or just remove it if it clashes. Let's keep distinct texture but heavily faded.
+                            <DynamicImage
+                                src={mapImage || "/images/global-map-dark.png"}
+                                fallbackSrc="/images/global-map-dark.png"
                                 alt="Global Presence Map"
                                 fill
                                 className="object-cover grayscale invert"
